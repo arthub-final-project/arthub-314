@@ -12,3 +12,18 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.square-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.carousel-img {
+  top: 0;
+  left: 0;
+  width: 10%;
+  height: 10%;
+  
+}
