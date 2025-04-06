@@ -1,8 +1,2 @@
-title: nextjs-application-template
-description: A template for quickly starting Next.js application development
-google_analytics:
-show_downloads: true
+title: ArtHub
 theme: jekyll-theme-cayman
-
-gems:
-  - jekyll-mentions
