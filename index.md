@@ -10,5 +10,5 @@ Selling art and networking as a freelance artist is difficult. Using social medi
 - advertise current projects to the wider art community
 - sell their products in an easy-to-use and secure marketplace
 
-  ## Mockup Pages (we should code up a few pages and post their screenshots here)
+  ## Mockup Pages 
 ![x](./Github-Page-Images/landing-page-mockup.png)
