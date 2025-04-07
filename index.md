@@ -17,3 +17,7 @@ Selling art and networking as a freelance artist is difficult. Using social medi
 sign up page
   
 ![x](./Github-Page-Images/sign-up-page-mockup.png)
+
+friends and followers page
+
+![x](./Github-Page-Images/FriendsMockup.png)
