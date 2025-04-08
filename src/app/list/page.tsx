@@ -1,9 +1,10 @@
 import { getServerSession } from 'next-auth';
-import { Col, Container, Row, Table } from 'react-bootstrap';
-import { prisma } from '@/lib/prisma';
-import StuffItem from '@/components/StuffItem';
+import { Col, Container, Row } from 'react-bootstrap';
 import { loggedInProtectedPage } from '@/lib/page-protection';
 import authOptions from '@/lib/authOptions';
+import { Profile } from '@/lib/validationSchemas';
+import ProfileCard from '@/components/ProfileCard';
+import { prisma } from '@/lib/prisma';
 
 /** Render a list of stuff for the logged in user. */
 const ListPage = async () => {
@@ -15,36 +16,30 @@ const ListPage = async () => {
       // eslint-disable-next-line @typescript-eslint/comma-dangle
     } | null,
   );
-  const owner = (session && session.user && session.user.email) || '';
-  const stuff = await prisma.stuff.findMany({
+  const owner = session?.user!.email ? session.user.email : '';
+  const profiles: Profile[] = await prisma.profile.findMany({
     where: {
       owner,
     },
   });
-  // console.log(stuff);
+  console.log(profiles);
   return (
     <main>
       <Container id="list" fluid className="py-3">
-        <Row>
-          <Col>
-            <h1>Stuff</h1>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Quantity</th>
-                  <th>Condition</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {stuff.map((item) => (
-                  <StuffItem key={item.id} {...item} />
+        <Container>
+          <Row>
+            <Col>
+              <h1 className="text-center">List Profiles</h1>
+              <Row xs={1} md={2} lg={3} className="g-4">
+                {profiles.map((profile) => (
+                  <Col key={profile.name}>
+                    <ProfileCard profile={profile} />
+                  </Col>
                 ))}
-              </tbody>
-            </Table>
-          </Col>
-        </Row>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
       </Container>
     </main>
   );
