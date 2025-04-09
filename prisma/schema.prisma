@@ -27,19 +27,15 @@ model User {
   email    String @unique
   password String
   role     Role   @default(USER)
+   galleryItems GalleryItem[]
 }
 
-enum Condition {
-  excellent
-  good
-  fair
-  poor
+model GalleryItem {
+  id        Int      @id @default(autoincrement())
+  title     String
+  imageUrl  String
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
 }
 
-model Stuff {
-  id        Int       @id @default(autoincrement())
-  name      String
-  quantity  Int
-  condition Condition @default(good)
-  owner     String
-}
