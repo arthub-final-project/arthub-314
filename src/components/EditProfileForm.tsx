@@ -39,51 +39,29 @@ const EditProfileForm = ({ profile }: { profile: Profile }) => {
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <input type="hidden" {...register('id')} value={profile.id} />
                 <Form.Group>
-                  <Form.Label>Name</Form.Label>
+                  <Form.Label>Username</Form.Label>
                   <input
                     type="text"
-                    {...register('firstName')}
-                    defaultValue={profile.firstName}
+                    {...register('name')}
+                    defaultValue={profile.name}
                     required
-                    className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
+                    className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                   />
-                  <div className="invalid-feedback">{errors.firstName?.message}</div>
+                  <div className="invalid-feedback">{errors.name?.message}</div>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label>Name</Form.Label>
+                  <Form.Label>Profile Picture</Form.Label>
                   <input
                     type="text"
-                    {...register('firstName')}
-                    defaultValue={profile.firstName}
+                    {...register('image')}
+                    defaultValue={profile.image}
                     required
-                    className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
+                    className={`form-control ${errors.image ? 'is-invalid' : ''}`}
                   />
-                  <div className="invalid-feedback">{errors.firstName?.message}</div>
+                  <div className="invalid-feedback">{errors.image?.message}</div>
                 </Form.Group>
-                <Form.Group>
-                  <Form.Label>Quantity</Form.Label>
-                  <input
-                    type="number"
-                    {...register('quantity')}
-                    defaultValue={profile.quantity}
-                    className={`form-control ${errors.quantity ? 'is-invalid' : ''}`}
-                  />
-                  <div className="invalid-feedback">{errors.quantity?.message}</div>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Condition</Form.Label>
-                  <select
-                    {...register('condition')}
-                    className={`form-control ${errors.condition ? 'is-invalid' : ''}`}
-                    defaultValue={profile.condition}
-                  >
-                    <option value="excellent">Excellent</option>
-                    <option value="good">Good</option>
-                    <option value="fair">Fair</option>
-                    <option value="poor">Poor</option>
-                  </select>
-                  <div className="invalid-feedback">{errors.condition?.message}</div>
-                </Form.Group>
+                <input type="hidden" {...register('role')} value={profile.role} />
+                <input type="hidden" {...register('followers')} value={profile.followers} />
                 <input type="hidden" {...register('owner')} value={profile.owner} />
                 <Form.Group className="form-group">
                   <Row className="pt-3">
