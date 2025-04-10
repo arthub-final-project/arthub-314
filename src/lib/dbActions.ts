@@ -1,30 +1,25 @@
 'use server';
 
-import { Stuff, Condition } from '@prisma/client';
+import { Profile } from '@prisma/client';
 import { hash } from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { prisma } from './prisma';
 
 /**
- * Adds a new stuff to the database.
- * @param stuff, an object with the following properties: name, quantity, owner, condition.
+ * Adds a new profile to the database.
+ * @param profile, an object with the following properties: id, firstName, lastName, image, followers, role, owner.
  */
-export async function addStuff(stuff: { name: string; quantity: number; owner: string; condition: string }) {
-  // console.log(`addStuff data: ${JSON.stringify(stuff, null, 2)}`);
-  let condition: Condition = 'good';
-  if (stuff.condition === 'poor') {
-    condition = 'poor';
-  } else if (stuff.condition === 'excellent') {
-    condition = 'excellent';
-  } else {
-    condition = 'fair';
-  }
-  await prisma.stuff.create({
+
+export async function addProfile(profile: Profile) {
+  // console.log(`addProfile data: ${JSON.stringify(profile, null, 2)}`);
+  await prisma.profile.create({
     data: {
-      name: stuff.name,
-      quantity: stuff.quantity,
-      owner: stuff.owner,
-      condition,
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      image: profile.image,
+      followers: profile.followers,
+      role: profile.role,
+      owner: profile.owner,
     },
   });
   // After adding, redirect to the list page
@@ -32,18 +27,20 @@ export async function addStuff(stuff: { name: string; quantity: number; owner: s
 }
 
 /**
- * Edits an existing stuff in the database.
- * @param stuff, an object with the following properties: id, name, quantity, owner, condition.
+ * Edits an existing profile in the database.
+ * @param profile, an object with the following properties: id, firstName, lastName, image, followers, role, owner.
  */
-export async function editStuff(stuff: Stuff) {
-  // console.log(`editStuff data: ${JSON.stringify(stuff, null, 2)}`);
-  await prisma.stuff.update({
-    where: { id: stuff.id },
+export async function editProfile(profile: Profile) {
+  // console.log(`editProfile data: ${JSON.stringify(profile, null, 2)}`);
+  await prisma.profile.update({
+    where: { id: profile.id },
     data: {
-      name: stuff.name,
-      quantity: stuff.quantity,
-      owner: stuff.owner,
-      condition: stuff.condition,
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      image: profile.image,
+      followers: profile.followers,
+      role: profile.role,
+      owner: profile.owner,
     },
   });
   // After updating, redirect to the list page
@@ -51,12 +48,12 @@ export async function editStuff(stuff: Stuff) {
 }
 
 /**
- * Deletes an existing stuff from the database.
- * @param id, the id of the stuff to delete.
+ * Deletes an existing profile from the database.
+ * @param id, the id of the profile to delete.
  */
-export async function deleteStuff(id: number) {
-  // console.log(`deleteStuff id: ${id}`);
-  await prisma.stuff.delete({
+export async function deleteProfile(id: number) {
+  // console.log(`deleteProfile id: ${id}`);
+  await prisma.profile.delete({
     where: { id },
   });
   // After deleting, redirect to the list page

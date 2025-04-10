@@ -1,16 +1,21 @@
 import * as Yup from 'yup';
+import { Role } from '@prisma/client';
 
-export const AddStuffSchema = Yup.object({
-  name: Yup.string().required(),
-  quantity: Yup.number().positive().required(),
-  condition: Yup.string().oneOf(['excellent', 'good', 'fair', 'poor']).required(),
+export const AddProfileSchema = Yup.object({
+  firstName: Yup.string().required(),
+  lastName: Yup.string().required(),
+  image: Yup.string().required(),
+  followers: Yup.number().positive().required(),
+  role: Yup.string().oneOf(Object.values(Role)).required(),
   owner: Yup.string().required(),
 });
 
-export const EditStuffSchema = Yup.object({
+export const EditProfileSchema = Yup.object({
   id: Yup.number().required(),
-  name: Yup.string().required(),
-  quantity: Yup.number().positive().required(),
-  condition: Yup.string().oneOf(['excellent', 'good', 'fair', 'poor']).required(),
+  firstName: Yup.string().required(),
+  lastName: Yup.string().required(),
+  image: Yup.string().required(),
+  followers: Yup.number().positive().required(),
+  role: Yup.string().oneOf(Object.values(Role)).required(),
   owner: Yup.string().required(),
 });

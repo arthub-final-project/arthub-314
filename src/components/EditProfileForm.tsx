@@ -4,57 +4,68 @@ import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Stuff } from '@prisma/client';
-import { EditStuffSchema } from '@/lib/validationSchemas';
-import { editStuff } from '@/lib/dbActions';
+import { Profile } from '@prisma/client';
+import { EditProfileSchema } from '@/lib/validationSchemas';
+import { editProfile } from '@/lib/dbActions';
 
-const onSubmit = async (data: Stuff) => {
+const onSubmit = async (data: Profile) => {
   // console.log(`onSubmit data: ${JSON.stringify(data, null, 2)}`);
-  await editStuff(data);
+  await editProfile(data);
   swal('Success', 'Your item has been updated', 'success', {
     timer: 2000,
   });
 };
 
-const EditStuffForm = ({ stuff }: { stuff: Stuff }) => {
+const EditProfileForm = ({ profile }: { profile: Profile }) => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Stuff>({
-    resolver: yupResolver(EditStuffSchema),
+  } = useForm<Profile>({
+    resolver: yupResolver(EditProfileSchema),
   });
-  // console.log(stuff);
+  // console.log(profile);
 
   return (
     <Container className="py-3">
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center">
-            <h2>Edit Stuff</h2>
+            <h2>Edit Profile</h2>
           </Col>
           <Card>
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
-                <input type="hidden" {...register('id')} value={stuff.id} />
+                <input type="hidden" {...register('id')} value={profile.id} />
                 <Form.Group>
                   <Form.Label>Name</Form.Label>
                   <input
                     type="text"
-                    {...register('name')}
-                    defaultValue={stuff.name}
+                    {...register('firstName')}
+                    defaultValue={profile.firstName}
                     required
-                    className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                    className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
                   />
-                  <div className="invalid-feedback">{errors.name?.message}</div>
+                  <div className="invalid-feedback">{errors.firstName?.message}</div>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Name</Form.Label>
+                  <input
+                    type="text"
+                    {...register('firstName')}
+                    defaultValue={profile.firstName}
+                    required
+                    className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
+                  />
+                  <div className="invalid-feedback">{errors.firstName?.message}</div>
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>Quantity</Form.Label>
                   <input
                     type="number"
                     {...register('quantity')}
-                    defaultValue={stuff.quantity}
+                    defaultValue={profile.quantity}
                     className={`form-control ${errors.quantity ? 'is-invalid' : ''}`}
                   />
                   <div className="invalid-feedback">{errors.quantity?.message}</div>
@@ -64,7 +75,7 @@ const EditStuffForm = ({ stuff }: { stuff: Stuff }) => {
                   <select
                     {...register('condition')}
                     className={`form-control ${errors.condition ? 'is-invalid' : ''}`}
-                    defaultValue={stuff.condition}
+                    defaultValue={profile.condition}
                   >
                     <option value="excellent">Excellent</option>
                     <option value="good">Good</option>
@@ -73,7 +84,7 @@ const EditStuffForm = ({ stuff }: { stuff: Stuff }) => {
                   </select>
                   <div className="invalid-feedback">{errors.condition?.message}</div>
                 </Form.Group>
-                <input type="hidden" {...register('owner')} value={stuff.owner} />
+                <input type="hidden" {...register('owner')} value={profile.owner} />
                 <Form.Group className="form-group">
                   <Row className="pt-3">
                     <Col>
@@ -97,4 +108,4 @@ const EditStuffForm = ({ stuff }: { stuff: Stuff }) => {
   );
 };
 
-export default EditStuffForm;
+export default EditProfileForm;
