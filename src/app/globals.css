@@ -20,23 +20,9 @@ body {
   overflow: hidden;
 }
 
-.carousel-img {
-  width: 300px;           /* fixed width */
-  height: 300px;          /* fixed height to create a square */
-  object-fit: cover;      /* crop the image to fill the box */
-  border-radius: 12px;    /* rounded corners */
-  margin-left: 150px; 
-    }    /* shift image to the right */
-
 .gallery-img {
   width: 200px;
   height: 200px;
   object-fit: cover;
   border-radius: 8px; /* optional rounded corners */
-}
-.carousel-username {
-  margin-left: 150px;
-                 /* Push it down a bit from the top */
-  bottom: auto !important;  /* Cancel Bootstrap's default "bottom: 20px" */
-  text-align: left;         /* Optional: left-align the caption */
 }

@@ -1,54 +1,48 @@
-/* eslint-disable @next/next/no-img-element */
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import CarouselComponent from '@/components/CarouseComponentl'; // Adjust the path as needed
-/** The Home page. */
-const Home = () => (
+'use client';
+
+import { Col, Container, Row } from 'react-bootstrap';
+import { Event } from '@/lib/validationSchemas';
+import EventCard from '@/components/EventCard';
+
+const events: Event[] = [
+  {
+    id: '1',
+    firstName: 'Paradise Pineapple Painting with JennyBHawaii',
+    lastName: '- First Saturday of Every Month',
+    address: "O'AHU",
+    description: 'Occurs between: May 3, 2025 - December 6, 2025\n9:00AM - 11:30AM',
+    image: '/paint.png', // change this to your image path
+  },
+  {
+    id: '2',
+    firstName: 'JCCH Craft & Collectibles Fair',
+    lastName: '',
+    address: 'HONOLULU',
+    description: 'Occurs between: May 10, 2025 - August 30, 2025\n1:00PM - 3:00PM',
+    image: '/sidewalk.png',
+  },
+];
+
+const HomePage = () => (
   <main>
-    <Container id="landing-page" fluid className="py-3">
-      <Row>
-        <h1 className="text-center">ArtHub Weekly Featured Artist Showcase</h1>
-        <CarouselComponent />
-      </Row>
-    </Container>
-    <Container className=" p-4" style={{ maxWidth: '1200px', minHeight: '400px' }}>
-      <Row className="mt-4">
-        <h2>Upcoming Events</h2>
-      </Row>
-      <Row>
-        <Col>
-          <Container className="border rounded p-4 my-4">
-            <b className="d-block mb-2">March 28-29th</b>
-            <img src="/eventexample3.jpg" alt="3" className="gallery-img" />
-          </Container>
-        </Col>
-        <Col>
-          <Container className="border rounded p-4 my-4">
-            <b className="d-block mb-2">April 12th</b>
-            <img src="/eventExample1.jpg" alt="3" className="gallery-img" />
-          </Container>
-        </Col>
-        <Col>
-          <Container className="border rounded p-4 my-4">
-            <b className="d-block mb-2">May 16-18th</b>
-            <img src="/eventexample2.jpg" alt="3" className="gallery-img" />
-          </Container>
-        </Col>
-      </Row>
-      <Row>
-        <Container>
-          <Row>
-            <Col>
-              <Container>
-                <Button variant="info" href="/events">
-                  see more events
-                </Button>
-              </Container>
-            </Col>
-          </Row>
-        </Container>
+    <Container className="py-4">
+      <h1 className="text-center mb-4 fw-bold display-4">
+        Upcoming Special Events
+      </h1>
+
+      <Row xs={1} md={2} lg={3} className="g-4">
+        {events.map((event) => (
+          <Col key={event.id}>
+            <EventCard contact={event} />
+          </Col>
+        ))}
       </Row>
     </Container>
   </main>
 );
 
-export default Home;
+export default HomePage;
+
+// CalendarEventFill
+// GeoAltFill
+// ClockFill
