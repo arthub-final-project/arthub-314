@@ -10,7 +10,7 @@ export const AddStuffSchema = Yup.object({
 export const AddProfileSchema = Yup.object({
   name: Yup.string().required(),
   contact: Yup.string().required(),
-  image: Yup.string().url().required(),
+  image: Yup.string().required(),
   socialMedia: Yup.string().url().required(),
   artpiece: Yup.string().required(),
   description: Yup.string().required(),
@@ -29,7 +29,7 @@ export const EditProfileSchema = Yup.object({
   id: Yup.number().required(),
   name: Yup.string().required(),
   contact: Yup.string().required(),
-  image: Yup.string().url().required(),
+  image: Yup.string().required(),
   socialMedia: Yup.string().url().required(),
   artpiece: Yup.string().required(),
   description: Yup.string().required(),

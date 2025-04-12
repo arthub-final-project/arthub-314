@@ -29,7 +29,7 @@ const ListPage = async () => {
         <Container>
           <Row>
             <Col>
-              <h1 className="text-center">List Profiles</h1>
+              <h1 className="text-center">Artist Profiles</h1>
               <Row xs={1} md={2} lg={3} className="g-4">
                 {profiles.map((profile) => (
                   <Col key={profile.name}>

@@ -57,10 +57,11 @@ const AddProfileForm: React.FC = () => {
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <Row>
                   <Col>
-                    <Form.Group>
+                    <Form.Group className="mb-2">
                       <Form.Label>Name</Form.Label>
                       <input
                         type="text"
+                        placeholder="Enter your first and last name"
                         {...register('name')}
                         className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                       />
@@ -68,10 +69,11 @@ const AddProfileForm: React.FC = () => {
                     </Form.Group>
                   </Col>
                   <Col>
-                    <Form.Group>
-                      <Form.Label>Contact</Form.Label>
+                    <Form.Group className="mb-2">
+                      <Form.Label>Contact Information</Form.Label>
                       <input
                         type="text"
+                        placeholder="Enter your preferred contact method"
                         {...register('contact')}
                         className={`form-control ${errors.contact ? 'is-invalid' : ''}`}
                       />
@@ -81,10 +83,11 @@ const AddProfileForm: React.FC = () => {
                 </Row>
                 <Row>
                   <Col>
-                    <Form.Group>
+                    <Form.Group className="mb-2">
                       <Form.Label>Image</Form.Label>
                       <input
                         type="text"
+                        placeholder="Enter a link or upload your profile picture"
                         {...register('image')}
                         className={`form-control ${errors.image ? 'is-invalid' : ''}`}
                       />
@@ -92,10 +95,11 @@ const AddProfileForm: React.FC = () => {
                     </Form.Group>
                   </Col>
                   <Col>
-                    <Form.Group>
+                    <Form.Group className="mb-2">
                       <Form.Label>Social Media</Form.Label>
                       <input
                         type="text"
+                        placeholder="Enter a link to your social media page"
                         {...register('socialMedia')}
                         className={`form-control ${errors.socialMedia ? 'is-invalid' : ''}`}
                       />
@@ -105,11 +109,12 @@ const AddProfileForm: React.FC = () => {
                 </Row>
                 <Row>
                   <Col>
-                    <Form.Group>
+                    <Form.Group className="mb-2">
                       <Form.Label>Artpiece</Form.Label>
                       <input
                         type="text"
                         {...register('artpiece')}
+                        placeholder="Enter a link to your artpiece or upload it"
                         className={`form-control ${errors.artpiece ? 'is-invalid' : ''}`}
                       />
                       <div className="invalid-feedback">{errors.artpiece?.message}</div>
@@ -120,6 +125,7 @@ const AddProfileForm: React.FC = () => {
                   <Form.Label>Description</Form.Label>
                   <textarea
                     {...register('description')}
+                    placeholder="Enter a description of yourself"
                     className={`form-control ${errors.description ? 'is-invalid' : ''}`}
                   />
                   <div className="invalid-feedback">{errors.description?.message}</div>
@@ -128,12 +134,10 @@ const AddProfileForm: React.FC = () => {
                 <Form.Group className="form-group">
                   <Row className="pt-3">
                     <Col>
-                      <Button type="submit" variant="primary">
+                      <Button type="submit" variant="primary" className="me-1">
                         Submit
                       </Button>
-                    </Col>
-                    <Col>
-                      <Button type="button" onClick={() => reset()} variant="warning" className="float-right">
+                      <Button type="button" onClick={() => reset()} variant="warning">
                         Reset
                       </Button>
                     </Col>
