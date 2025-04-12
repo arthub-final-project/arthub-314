@@ -4,25 +4,17 @@ import { Event } from '@/lib/validationSchemas';
 
 const EventCard = ({ contact }: { contact: Event }) => (
   <Card className="h-100 position-relative overflow-hidden">
-    {/* Date in top left */}
-    <div style={{
-      position: 'absolute',
-      top: '1rem',
-      left: '1rem',
-      backgroundColor: '#004F71', // your blue color
-      color: 'white',
-      padding: '0.5rem',
-      textAlign: 'center',
-      lineHeight: '1',
-    }}
-    >
-      <div style={{ fontSize: '0.75rem' }}>MAY</div>
-      <div style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>3</div>
-      <div style={{ fontSize: '0.75rem' }}>2025</div>
-    </div>
-
     {/* Image */}
-    <Card.Img src={contact.image} alt="event" />
+    <Card.Img
+      src={contact.image}
+      alt="event"
+      style={{
+        height: '250px',
+        objectFit: 'cover',
+        width: '100%',
+        borderRadius: '0', // <-- this removes the curve
+      }}
+    />
 
     {/* O'ahu Banner */}
     <div style={{
@@ -47,14 +39,6 @@ const EventCard = ({ contact }: { contact: Event }) => (
         {' '}
         {contact.lastName}
       </Card.Title>
-
-      <Card.Subtitle className="text-muted mb-2">
-        Occurs between: May 3, 2025 - Dec 6, 2025
-      </Card.Subtitle>
-
-      <Card.Text>
-        9:00AM - 11:30AM
-      </Card.Text>
 
       <Card.Text>
         {contact.description}
