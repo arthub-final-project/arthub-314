@@ -9,9 +9,11 @@ export interface Event {
   image: string;
 }
 export const AddGalleryItemSchema = Yup.object({
-  title: Yup.string().required(),
-  description: Yup.string().required(),
-  image: Yup.string().url().required(),
+  title: Yup.string().required('Title is required'),
+  description: Yup.string().required('Description is required'),
+  image: Yup
+    .mixed<FileList>()
+    .test('required', 'An image is required', (value) => value && value.length > 0),
 });
 
 export type GalleryItem = {

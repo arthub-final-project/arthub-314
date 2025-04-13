@@ -1,24 +1,25 @@
-/* eslint-disable react/button-has-type */
 import { getServerSession } from 'next-auth';
-import { Col, Container, Row, Table } from 'react-bootstrap';
+import { Col, Container, Row, Table, Image } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
-import { loggedInProtectedPage } from '@/lib/page-protection';
 import authOptions from '@/lib/authOptions';
+import { loggedInProtectedPage } from '@/lib/page-protection';
 
-/** Render a list of stuff for the logged in user. */
+/** Render a list of gallery items for the logged in user. */
 const ListPage = async () => {
-  // Protect the page, only logged in users can access it.
   const session = await getServerSession(authOptions);
-  loggedInProtectedPage(
-    session as {
-      user: { email: string; id: string; randomKey: string };
-    } | null,
-  );
-  const owner = (session && session.user && session.user.email) || '';
-  const stuff = await prisma.stuff.findMany({
-    where: {
-      owner,
-    },
+  loggedInProtectedPage(session as { user: { email: string; id: string; randomKey: string } } | null);
+
+  const user = await prisma.user.findUnique({
+    where: { email: session?.user?.email || '' },
+    select: { id: true },
+  });
+
+  if (!user) {
+    return <div className="p-4">User not found.</div>;
+  }
+
+  const galleryItems = await prisma.galleryItem.findMany({
+    where: { userId: user.id },
   });
 
   return (
@@ -26,27 +27,28 @@ const ListPage = async () => {
       <Container id="list" fluid className="py-3">
         <Row>
           <Col>
-            <h1>Stuff</h1>
+            <h1>My Uploaded Gallery Items</h1>
             <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Quantity</th>
-                  <th>Condition</th>
-                  <th>Actions</th>
+                  <th>Title</th>
+                  <th>Image</th>
+                  <th>Uploaded</th>
                 </tr>
               </thead>
               <tbody>
-                {stuff.map((item) => (
+                {galleryItems.map((item) => (
                   <tr key={item.id}>
-                    <td>{item.name}</td>
-                    <td>{item.quantity}</td>
-                    <td>{item.condition}</td>
+                    <td>{item.title}</td>
                     <td>
-                      {/* Add any action buttons or links here */}
-                      <button>Edit</button>
-                      <button>Delete</button>
+                      <Image
+                        src={item.imageUrl}
+                        alt={item.title}
+                        height={64}
+                        style={{ objectFit: 'cover' }}
+                      />
                     </td>
+                    <td>{item.createdAt.toLocaleDateString()}</td>
                   </tr>
                 ))}
               </tbody>
