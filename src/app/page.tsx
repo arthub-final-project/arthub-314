@@ -1,81 +1,54 @@
-'use client';
-
-import { Col, Container, Row } from 'react-bootstrap';
-import { Event } from '@/lib/validationSchemas';
-import EventCard from '@/components/EventCard';
-
-const events: Event[] = [
-  {
-    id: '1',
-    firstName: 'Paradise Pineapple Painting with JennyBHawaii',
-    lastName: '- First Saturday of Every Month',
-    address: "O'AHU",
-    description: 'Occurs between: May 3, 2025 - December 6, 2025\n9:00AM - 11:30AM',
-    image: '/paint.png', // change this to your image path
-  },
-  {
-    id: '2',
-    firstName: 'JCCH Craft & Collectibles Fair',
-    lastName: '',
-    address: 'HONOLULU',
-    description: 'Occurs between: May 10, 2025 - August 30, 2025\n1:00PM - 3:00PM',
-    image: '/sidewalk.png',
-  },
-  {
-    id: '3',
-    firstName: 'Hawaii craftables Festival',
-    lastName: '- 20th Anniversary Celebration',
-    address: 'HONOLULU',
-    description: 'Occurs between: May 10, 2025 - May 11, 2025\n10:00AM - 5:00PM',
-    image: '/bowls.png',
-  },
-  {
-    id: '4',
-    firstName: 'Hawaii Art Exhibit',
-    lastName: '- Oahu Event',
-    address: 'OAHU',
-    description: 'Occurs between: May 17, 2025 - May 19, 2025\n6:00PM - 9:00PM',
-    image: '/exhibit.png',
-
-  },
-  {
-    id: '5',
-    firstName: 'Hand Crafted Art',
-    lastName: '- Oahu Event',
-    address: 'OAHU',
-    description: 'Occurs between: May 24, 2025 - May 26, 2025\n10:00AM - 4:00PM',
-    image: '/bowls.png',
-  },
-  {
-    id: '6',
-    firstName: 'Hawaii Art & Craft Collections',
-    lastName: '- Oahu Event',
-    address: 'OAHU',
-    description: 'Occurs between: June 1, 2025 - June 3, 2025\n10:00AM - 4:00PM',
-    image: '/Artssell.png',
-  },
-];
-
-const HomePage = () => (
+/* eslint-disable @next/next/no-img-element */
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import CarouselComponent from '@/components/CarouseComponentl'; // Adjust the path as needed
+/** The Home page. */
+const Home = () => (
   <main>
-    <Container className="py-4">
-      <h1 className="text-center mb-4 fw-bold display-4">
-        Upcoming Special Art Events
-      </h1>
-
-      <Row xs={1} md={2} lg={3} className="g-4">
-        {events.map((event) => (
-          <Col key={event.id}>
-            <EventCard contact={event} />
-          </Col>
-        ))}
+    <Container id="landing-page" fluid className="py-3">
+      <Row>
+        <h1 className="text-center">ArtHub Weekly Featured Artist Showcase</h1>
+        <CarouselComponent />
+      </Row>
+    </Container>
+    <Container className=" p-4" style={{ maxWidth: '1200px', minHeight: '400px' }}>
+      <Row className="mt-4">
+        <h2>Upcoming Events</h2>
+      </Row>
+      <Row>
+        <Col>
+          <Container className="border rounded p-4 my-4">
+            <b className="d-block mb-2">March 28-29th</b>
+            <img src="/eventexample3.jpg" alt="3" className="gallery-img" />
+          </Container>
+        </Col>
+        <Col>
+          <Container className="border rounded p-4 my-4">
+            <b className="d-block mb-2">April 12th</b>
+            <img src="/eventExample1.jpg" alt="3" className="gallery-img" />
+          </Container>
+        </Col>
+        <Col>
+          <Container className="border rounded p-4 my-4">
+            <b className="d-block mb-2">May 16-18th</b>
+            <img src="/eventexample2.jpg" alt="3" className="gallery-img" />
+          </Container>
+        </Col>
+      </Row>
+      <Row>
+        <Container>
+          <Row>
+            <Col>
+              <Container>
+                <Button variant="info" href="/events">
+                  see more events
+                </Button>
+              </Container>
+            </Col>
+          </Row>
+        </Container>
       </Row>
     </Container>
   </main>
 );
 
-export default HomePage;
-
-// CalendarEventFill
-// GeoAltFill
-// ClockFill
+export default Home;
