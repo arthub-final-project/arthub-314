@@ -18,7 +18,7 @@ const GalleryCard = ({ user, gallery }: { user: User, gallery: GalleryItem }) =>
     </Card.Body>
     <Card.Footer className="d-flex align-items-center gap-2">
       <img
-        src={user.profileImage || '/default-avatar.png'}
+        src={user.profileImage}
         alt={user.name}
         width={32}
         height={32}
