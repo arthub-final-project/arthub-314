@@ -30,7 +30,7 @@ export const EditProfileSchema = Yup.object({
   name: Yup.string().required(),
   contact: Yup.string().required(),
   image: Yup.string().required(),
-  socialMedia: Yup.string().url().required(),
+  socialMedia: Yup.string().required(),
   artpiece: Yup.string().required(),
   description: Yup.string().required(),
   owner: Yup.string().required(),

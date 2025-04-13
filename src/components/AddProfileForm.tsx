@@ -99,7 +99,7 @@ const AddProfileForm: React.FC = () => {
                       <Form.Label>Social Media</Form.Label>
                       <input
                         type="text"
-                        placeholder="Enter a link to your social media page"
+                        placeholder="Enter a social media handle(username) here"
                         {...register('socialMedia')}
                         className={`form-control ${errors.socialMedia ? 'is-invalid' : ''}`}
                       />
