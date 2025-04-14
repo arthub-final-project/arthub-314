@@ -10,17 +10,33 @@ import { addProfile } from '@/lib/dbActions';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { AddProfileSchema } from '@/lib/validationSchemas';
 
-const onSubmit = async (data: {
+type FormInputs = {
   name: string;
   contact: string;
-  image: string;
+  image: FileList;
   socialMedia: string;
-  artpiece: string;
+  artpiece: FileList;
   description: string;
   owner: string;
-}) => {
-  // console.log(`onSubmit data: ${JSON.stringify(data, null, 2)}`);
-  await addProfile(data);
+};
+
+// Helper to convert File -> Base64 string
+const fileToBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => resolve(reader.result as string);
+  reader.onerror = (error) => reject(error);
+});
+
+const onSubmit = async (data: FormInputs) => {
+  const imageFile = data.image[0];
+  const artpieceFile = data.artpiece[0];
+
+  const imageUrl = imageFile ? await fileToBase64(imageFile) : '';
+  const artpieceUrl = artpieceFile ? await fileToBase64(artpieceFile) : '';
+
+  await addProfile({ ...data, image: imageUrl, artpiece: artpieceUrl });
+
   swal('Success', 'Your profile has been added', 'success', {
     timer: 2000,
   });
@@ -28,19 +44,21 @@ const onSubmit = async (data: {
 
 const AddProfileForm: React.FC = () => {
   const { data: session, status } = useSession();
-  // console.log('AddStuffForm', status, session);
   const currentUser = session?.user?.email || '';
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormInputs>({
     resolver: yupResolver(AddProfileSchema),
   });
+
   if (status === 'loading') {
     return <LoadingSpinner />;
   }
+
   if (status === 'unauthenticated') {
     redirect('/auth/signin');
   }
@@ -61,7 +79,7 @@ const AddProfileForm: React.FC = () => {
                       <Form.Label>Name</Form.Label>
                       <input
                         type="text"
-                        placeholder="Enter your first and last name"
+                        placeholder="Enter your name"
                         {...register('name')}
                         className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                       />
@@ -84,10 +102,10 @@ const AddProfileForm: React.FC = () => {
                 <Row>
                   <Col>
                     <Form.Group className="mb-2">
-                      <Form.Label>Image</Form.Label>
+                      <Form.Label>Profile Image</Form.Label>
                       <input
-                        type="text"
-                        placeholder="Enter a link or upload your profile picture"
+                        type="file"
+                        accept="image/*"
                         {...register('image')}
                         className={`form-control ${errors.image ? 'is-invalid' : ''}`}
                       />
@@ -99,7 +117,7 @@ const AddProfileForm: React.FC = () => {
                       <Form.Label>Social Media</Form.Label>
                       <input
                         type="text"
-                        placeholder="Enter a social media handle(username) here"
+                        placeholder="Social media handle"
                         {...register('socialMedia')}
                         className={`form-control ${errors.socialMedia ? 'is-invalid' : ''}`}
                       />
@@ -112,37 +130,37 @@ const AddProfileForm: React.FC = () => {
                     <Form.Group className="mb-2">
                       <Form.Label>Artpiece</Form.Label>
                       <input
-                        type="text"
+                        type="file"
+                        accept="image/*"
                         {...register('artpiece')}
-                        placeholder="Enter a link to your artpiece or upload it"
                         className={`form-control ${errors.artpiece ? 'is-invalid' : ''}`}
                       />
                       <div className="invalid-feedback">{errors.artpiece?.message}</div>
                     </Form.Group>
                   </Col>
                 </Row>
-                <Form.Group>
+                <Form.Group className="mb-2">
                   <Form.Label>Description</Form.Label>
                   <textarea
                     {...register('description')}
-                    placeholder="Enter a description of yourself"
+                    placeholder="Include a brief description of yourself"
                     className={`form-control ${errors.description ? 'is-invalid' : ''}`}
                   />
                   <div className="invalid-feedback">{errors.description?.message}</div>
                 </Form.Group>
+
                 <input type="hidden" {...register('owner')} value={currentUser} />
-                <Form.Group className="form-group">
-                  <Row className="pt-3">
-                    <Col>
-                      <Button type="submit" variant="primary" className="me-1">
-                        Submit
-                      </Button>
-                      <Button type="button" onClick={() => reset()} variant="warning">
-                        Reset
-                      </Button>
-                    </Col>
-                  </Row>
-                </Form.Group>
+
+                <Row className="pt-3">
+                  <Col>
+                    <Button type="submit" variant="primary" className="me-2">
+                      Submit
+                    </Button>
+                    <Button type="button" onClick={() => reset()} variant="warning">
+                      Reset
+                    </Button>
+                  </Col>
+                </Row>
               </Form>
             </Card.Body>
           </Card>

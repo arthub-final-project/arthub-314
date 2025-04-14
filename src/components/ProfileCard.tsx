@@ -45,16 +45,16 @@ const ProfileCard = ({ profile }: { profile: Profile }) => (
           fluid
           alt={`${profile.name}'s artwork`}
           className="rounded shadow-sm"
-          style={{ maxHeight: '150px', objectFit: 'cover' }}
+          style={{ maxHeight: '250px', objectFit: 'cover' }}
         />
-        <p className="text mt-2 ms-1 small">
-          Artwork1
+        <p className="text mt-1 ms-1 text-center me-5">
+          Artwork 1
         </p>
       </div>
     )}
 
     {/* Footer */}
-    <div className="text-end mt-3">
+    <div className="text-end mt-1">
       <Link href={`edit/${profile.id}`} className="btn btn-outline-primary btn-sm">
         Edit
       </Link>
