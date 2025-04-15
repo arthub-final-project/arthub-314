@@ -1,3 +1,4 @@
+'use client';
 /* eslint-disable @next/next/no-img-element */
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import CarouselComponent from '@/components/CarouseComponentl'; // Adjust the path as needed

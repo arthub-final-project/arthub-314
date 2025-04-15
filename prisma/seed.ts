@@ -44,3 +44,19 @@ main()
     await prisma.$disconnect();
     process.exit(1);
   });
+config.defaultProfiles.forEach(async (profile, index) => {
+  console.log(`  Adding profile: ${profile.name}`);
+  await prisma.profile.upsert({
+    where: { id: index },
+    update: {},
+    create: {
+      name: profile.name,
+      contact: profile.contact,
+      image: profile.image,
+      socialMedia: profile.socialMedia,
+      artpiece: profile.artpiece,
+      description: profile.description,
+      owner: profile.owner,
+    },
+  });
+});
