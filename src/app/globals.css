@@ -13,10 +13,21 @@ body {
   display: flex;
   flex-direction: column;
 }
-
 #landing-page {
   background-image: url('/sunset2.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+.navbar .navbar-brand {
+  color: white !important;
+}
+.navbar .navbar-brand:hover {
+  color: lightblue !important;
+}
+#login-dropdown {
+  color: white !important;
+}
+#login-dropdown:hover {
+  color: lightblue !important;
 }
