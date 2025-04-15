@@ -1,4 +1,10 @@
-'use client';
+const AddProfileForm: React.FC = () => {
+  return <div>Form temporarily deactivated</div>;
+};
+
+export default AddProfileForm;
+
+/* 'use client';
 
 import { useSession } from 'next-auth/react';
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
@@ -32,10 +38,16 @@ const onSubmit = async (data: FormInputs) => {
   const imageFile = data.image instanceof FileList && data.image.length > 0 ? data.image[0] : null;
   const artpieceFile = data.artpiece instanceof FileList && data.artpiece.length > 0 ? data.artpiece[0] : null;
   
-  const imageUrl = imageFile ? await fileToBase64(imageFile) : '';
-  const artpieceUrl = artpieceFile ? await fileToBase64(artpieceFile) : '';
+  const formData = new FormData();
+  formData.append('name', data.name);
+  formData.append('contact', data.contact);
+  formData.append('socialMedia', data.socialMedia);
+  formData.append('description', data.description);
+  formData.append('owner', data.owner);
+  if (imageFile) formData.append('image', imageFile);
+  if (artpieceFile) formData.append('artpiece', artpieceFile);
 
-  await addProfile({ ...data, image: imageUrl, artpiece: artpieceUrl });
+  await addProfile({ ...data, image: imageFile, artpiece: artpieceFile });
 
   swal('Success', 'Your profile has been added', 'success', {
     timer: 2000,
@@ -170,3 +182,4 @@ const AddProfileForm: React.FC = () => {
 };
 
 export default AddProfileForm;
+*/

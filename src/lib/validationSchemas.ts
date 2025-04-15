@@ -15,28 +15,28 @@ export const AddProfileSchema = Yup.object({
     .nullable()
     .required('Image is required')
     .test('fileExists', 'Image is required', (value) => {
-      if (value === null) return false;
       return value instanceof FileList && value.length > 0;
     })
     .test('fileType', 'Unsupported file format', (value) => {
-      if (!value || !(value instanceof FileList)) return false;
-      return ['image/png', 'image/jpg', 'image/jpeg'].includes(value[0]?.type);
+      if (!(value instanceof FileList)) return false;
+      const file = value[0];
+      return file && ['image/png', 'image/jpg', 'image/jpeg'].includes(file.type);
     }),
-  socialMedia: Yup.string().required('Social media is required'),
   artpiece: Yup.mixed<FileList>()
     .nullable()
     .required('Artpiece is required')
     .test('fileExists', 'Artpiece is required', (value) => {
-      if (value === null) return false;
       return value instanceof FileList && value.length > 0;
     })
     .test('fileType', 'Unsupported file format', (value) => {
-      if (!value || !(value instanceof FileList)) return false;
-      return ['image/png', 'image/jpg', 'image/jpeg'].includes(value[0]?.type);
+      if (!(value instanceof FileList)) return false;
+      const file = value[0];
+      return file && ['image/png', 'image/jpg', 'image/jpeg'].includes(file.type);
     }),
+  socialMedia: Yup.string().required('Social media is required'),
   description: Yup.string().required('Description is required'),
   owner: Yup.string().required('Owner is required'),
-}).required();
+});
 
 
 export const EditStuffSchema = Yup.object({
