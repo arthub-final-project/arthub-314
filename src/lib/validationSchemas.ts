@@ -13,11 +13,11 @@ export const AddProfileSchema = Yup.object({
   image: Yup.mixed()
     .required('Image is required')
     .test('fileExists', 'Image is required', (value: unknown) => {
-      const fileList = value as FileList | null;
+      const fileList = value as FileList | void;
       return fileList && fileList.length > 0; // Check if there's at least one file
     })
     .test('fileType', 'Unsupported file format', (value: unknown) => {
-      const fileList = value as FileList | null;
+      const fileList = value as FileList | void;
       return (
         fileList &&
         fileList[0] &&
@@ -28,11 +28,11 @@ export const AddProfileSchema = Yup.object({
   artpiece: Yup.mixed()
     .required('Artpiece is required')
     .test('fileExists', 'Artpiece is required', (value: unknown) => {
-      const fileList = value as FileList | null;
+      const fileList = value as FileList | void;
       return fileList && fileList.length > 0; // Check if there's at least one file
     })
     .test('fileType', 'Unsupported file format', (value: unknown) => {
-      const fileList = value as FileList | null;
+      const fileList = value as FileList | void;
       return (
         fileList &&
         fileList[0] &&

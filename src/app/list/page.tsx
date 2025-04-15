@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import { getServerSession } from 'next-auth';
 import { Col, Container, Row } from 'react-bootstrap';
 import { loggedInProtectedPage } from '@/lib/page-protection';
@@ -13,7 +14,6 @@ const ListPage = async () => {
   loggedInProtectedPage(
     session as {
       user: { email: string; id: string; randomKey: string };
-      // eslint-disable-next-line @typescript-eslint/comma-dangle
     } | null,
   );
   const owner = session?.user!.email ? session.user.email : '';
@@ -22,6 +22,7 @@ const ListPage = async () => {
       owner,
     },
   });
+
   console.log(profiles);
   return (
     <main>

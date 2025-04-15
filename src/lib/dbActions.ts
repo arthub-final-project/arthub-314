@@ -1,7 +1,7 @@
 'use server';
 
-import { Stuff, Condition, Profile } from '@prisma/client';
-import { hash } from 'bcrypt';
+import { Stuff, Condition, Profile, Role } from '@prisma/client';
+import { hash, compare } from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { prisma } from './prisma';
 
@@ -108,13 +108,14 @@ export async function deleteStuff(id: number) {
  * Creates a new user in the database.
  * @param credentials, an object with the following properties: email, password.
  */
-export async function createUser(credentials: { email: string; password: string }) {
+export async function createUser(credentials: { email: string; password: string; role?: 'Artist' | 'Collector' }) {
   // console.log(`createUser data: ${JSON.stringify(credentials, null, 2)}`);
   const password = await hash(credentials.password, 10);
   await prisma.user.create({
     data: {
       email: credentials.email,
       password,
+      role: credentials.role as Role | undefined,
     },
   });
 }
@@ -123,13 +124,16 @@ export async function createUser(credentials: { email: string; password: string 
  * Changes the password of an existing user in the database.
  * @param credentials, an object with the following properties: email, password.
  */
-export async function changePassword(credentials: { email: string; password: string }) {
-  // console.log(`changePassword data: ${JSON.stringify(credentials, null, 2)}`);
-  const password = await hash(credentials.password, 10);
+export async function changePassword(credentials: { email: string; oldpassword: string; password: string }) {
+  const user = await prisma.user.findUnique({ where: { email: credentials.email } });
+  if (!user) throw new Error('User not found');
+
+  const isOldPasswordCorrect = await compare(credentials.oldpassword, user.password);
+  if (!isOldPasswordCorrect) throw new Error('Old password is incorrect');
+
+  const hashedPassword = await hash(credentials.password, 10);
   await prisma.user.update({
     where: { email: credentials.email },
-    data: {
-      password,
-    },
+    data: { password: hashedPassword },
   });
 }

@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import { getServerSession } from 'next-auth';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Profile } from '@prisma/client';
