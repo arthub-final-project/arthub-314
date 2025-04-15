@@ -19,18 +19,21 @@ const NavBar: React.FC = () => {
         <Navbar.Brand href="/">ArtHub</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-        <Form className="d-flex">
-        <FormControl
-          type="search"
-          placeholder="Explore..."
-          className="me-2 rounded-pill"
-          style={{ width: '270px' }}
-          aria-label="Search"
-        />
-        <Button className="rounded-pill" variant="primary" color="white">
-          <Search color="white" />
-        </Button>
-        </Form>
+          <Form className="d-flex">
+            <FormControl
+              type="search"
+              placeholder="Explore..."
+              className="me-2 rounded-pill"
+              style={{ width: '270px' }}
+              aria-label="Search"
+            />
+            <Button className="rounded-pill" variant="primary" color="white" type="submit">
+              <Search color="white" />
+            </Button>
+          </Form>
+          <Nav className="me-auto">
+            <Nav.Link href="/friends">Friends</Nav.Link>
+          </Nav>
           <Nav className="ms-auto justify-content-end">
             {session ? (
               <NavDropdown id="login-dropdown" title={currentUser}>

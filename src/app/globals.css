@@ -14,8 +14,8 @@ body {
   display: flex;
   flex-direction: column;
 }
-#landing-page {
-  background-image: url('/sunset2.webp');
+#friends-page {
+  background-image: url('/cityLandscape.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -23,7 +23,13 @@ body {
 .navbar .navbar-brand {
   color: white !important;
 }
+.navbar .nav-link {
+  color: white !important;
+}
 .navbar .navbar-brand:hover {
+  color: lightblue !important;
+}
+.navbar .nav-link:hover {
   color: lightblue !important;
 }
 #login-dropdown {
