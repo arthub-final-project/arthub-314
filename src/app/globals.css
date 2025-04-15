@@ -13,6 +13,40 @@ body {
   display: flex;
   flex-direction: column;
 }
+.fixed-card {
+  width: 300px;
+  height: 200px;
+}
+#artworks-page {
+  background-image: url('/BGLandscape.jpg');
+}
+#friends-page {
+  background-image: url('/cityLandscape.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.navbar .navbar-brand {
+  color: white !important;
+  font-size: 30px;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+.navbar .nav-link {
+  color: white !important;
+  font-size: 18px;
+}
+.navbar .navbar-brand:hover {
+  color: lightblue !important;
+}
+.navbar .nav-link:hover {
+  color: lightblue !important;
+}
+#login-dropdown {
+  color: white !important;
+}
+#login-dropdown:hover {
+  color: lightblue !important;
+}
 
 .square-wrapper {
   position: relative;
@@ -40,4 +74,12 @@ body {
   margin-left: 150px;
   bottom: auto !important;  /* Cancel Bootstrap's default "bottom: 20px" */
   text-align: left;         /* Optional: left-align the caption */
+}
+
+.footer {
+  /* position: fixed; Fix the footer to the bottom of the viewport */
+  bottom: 0; /* Align it to the bottom */
+  left: 0; /* Align it to the left */
+  width: 100%;
+  z-index: 1000; /* Ensure it appears above other content */
 }

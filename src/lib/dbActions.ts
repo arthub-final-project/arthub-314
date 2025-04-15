@@ -1,6 +1,6 @@
 'use server';
 
-import { Stuff, Condition, Role } from '@prisma/client';
+import { Stuff, Condition, Profile, Role } from '@prisma/client';
 import { hash, compare } from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { prisma } from './prisma';
@@ -28,6 +28,47 @@ export async function addStuff(stuff: { name: string; quantity: number; owner: s
     },
   });
   // After adding, redirect to the list page
+  redirect('/list');
+}
+
+export async function addProfile(
+  profile: {
+    name: string;
+    contact: string;
+    image: string;
+    socialMedia: string;
+    artpiece: string;
+    description: string;
+    owner: string;
+  },
+) {
+  await prisma.profile.create({
+    data: {
+      name: profile.name,
+      contact: profile.contact,
+      image: profile.image,
+      socialMedia: profile.socialMedia,
+      artpiece: profile.artpiece,
+      description: profile.description,
+      owner: profile.owner,
+    },
+  });
+  redirect('/list');
+}
+
+export async function editProfile(profile: Profile) {
+  await prisma.profile.update({
+    where: { id: profile.id },
+    data: {
+      name: profile.name,
+      contact: profile.contact,
+      image: profile.image,
+      socialMedia: profile.socialMedia,
+      artpiece: profile.artpiece,
+      description: profile.description,
+      owner: profile.owner,
+    },
+  });
   redirect('/list');
 }
 
