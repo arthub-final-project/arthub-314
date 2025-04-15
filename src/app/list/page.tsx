@@ -1,4 +1,4 @@
-/* eslint-disable react/button-has-type */
+/* eslint-disable react/button-has-type 
 import { getServerSession } from 'next-auth';
 import { Col, Container, Row } from 'react-bootstrap';
 import { loggedInProtectedPage } from '@/lib/page-protection';
@@ -7,7 +7,7 @@ import { Profile } from '@prisma/client';
 import ProfileCard from '@/components/ProfileCard';
 import { prisma } from '@/lib/prisma';
 
-/** Render a list of stuff for the logged in user. */
+/** Render a list of stuff for the logged in user. 
 const ListPage = async () => {
   // Protect the page, only logged in users can access it.
   const session = await getServerSession(authOptions);
@@ -47,3 +47,4 @@ const ListPage = async () => {
 };
 
 export default ListPage;
+*/

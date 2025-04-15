@@ -1,4 +1,4 @@
-/* eslint-disable react/button-has-type */
+/* eslint-disable react/button-has-type 
 import { getServerSession } from 'next-auth';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Profile } from '@prisma/client';
@@ -36,3 +36,4 @@ const AdminPage = async () => {
 };
 
 export default AdminPage;
+*/
