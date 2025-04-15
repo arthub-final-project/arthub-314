@@ -3,7 +3,7 @@ import { getServerSession } from 'next-auth';
 import { Col, Container, Row } from 'react-bootstrap';
 import { loggedInProtectedPage } from '@/lib/page-protection';
 import authOptions from '@/lib/authOptions';
-import { Profile } from '@/lib/validationSchemas';
+import { Profile } from '@prisma/client';
 import ProfileCard from '@/components/ProfileCard';
 import { prisma } from '@/lib/prisma';
 
