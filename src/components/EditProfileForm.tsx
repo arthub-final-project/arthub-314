@@ -1,4 +1,10 @@
-'use client';
+const EditProfileForm: React.FC = () => {
+  return <div>Form temporarily deactivated</div>;
+};
+
+export default EditProfileForm;
+
+/* 'use client';
 
 import { Button, Card, Col, Container, Form, Row, Image } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
@@ -214,3 +220,4 @@ const EditProfileForm = ({ profile }: { profile: Profile }) => {
 };
 
 export default EditProfileForm;
+*/
