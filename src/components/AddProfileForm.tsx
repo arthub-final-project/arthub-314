@@ -8,14 +8,14 @@ import swal from 'sweetalert';
 import { redirect } from 'next/navigation';
 import { addProfile } from '@/lib/dbActions';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import { AddProfileSchema } from '@/lib/validationSchemas';
+import { AddProfileFormSchema, AddProfileSchema } from '@/lib/validationSchemas';
 
 type FormInputs = {
   name: string;
   contact: string;
-  image: FileList;
+  image: FileList | null;
   socialMedia: string;
-  artpiece: FileList;
+  artpiece: FileList | null;
   description: string;
   owner: string;
 };
@@ -29,9 +29,9 @@ const fileToBase64 = (file: File): Promise<string> => new Promise((resolve, reje
 });
 
 const onSubmit = async (data: FormInputs) => {
-  const imageFile = data.image[0];
-  const artpieceFile = data.artpiece[0];
-
+  const imageFile = data.image instanceof FileList && data.image.length > 0 ? data.image[0] : null;
+  const artpieceFile = data.artpiece instanceof FileList && data.artpiece.length > 0 ? data.artpiece[0] : null;
+  
   const imageUrl = imageFile ? await fileToBase64(imageFile) : '';
   const artpieceUrl = artpieceFile ? await fileToBase64(artpieceFile) : '';
 
@@ -51,7 +51,7 @@ const AddProfileForm: React.FC = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormInputs>({
+  } = useForm<AddProfileFormSchema>({
     resolver: yupResolver(AddProfileSchema),
   });
 
@@ -149,8 +149,7 @@ const AddProfileForm: React.FC = () => {
                   <div className="invalid-feedback">{errors.description?.message}</div>
                 </Form.Group>
 
-                <input type="hidden" {...register('owner')} value={currentUser} />
-
+                <input type="hidden" {...register('owner')} value={currentUser || ''} />
                 <Row className="pt-3">
                   <Col>
                     <Button type="submit" variant="primary" className="me-2">

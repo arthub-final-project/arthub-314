@@ -115,7 +115,7 @@ export async function createUser(credentials: { email: string; password: string;
     data: {
       email: credentials.email,
       password,
-      role: credentials.role as Role | undefined,
+      role: credentials.role ?? 'Collector',
     },
   });
 }
