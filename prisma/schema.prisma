@@ -44,14 +44,3 @@ model Stuff {
   condition Condition @default(good)
   owner     String
 }
-
-model Profile {
-  id              Int       @id @default(autoincrement())
-  name            String
-  contact         String
-  image           String
-  socialMedia     String
-  artpiece        String
-  description     String
-  owner           String
-}
