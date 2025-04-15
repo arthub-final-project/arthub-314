@@ -1,7 +1,7 @@
+/* eslint-disable react/button-has-type */
 import { getServerSession } from 'next-auth';
 import { Col, Container, Row, Table } from 'react-bootstrap';
 import { prisma } from '@/lib/prisma';
-import StuffItem from '@/components/StuffItem';
 import { loggedInProtectedPage } from '@/lib/page-protection';
 import authOptions from '@/lib/authOptions';
 
@@ -12,7 +12,6 @@ const ListPage = async () => {
   loggedInProtectedPage(
     session as {
       user: { email: string; id: string; randomKey: string };
-      // eslint-disable-next-line @typescript-eslint/comma-dangle
     } | null,
   );
   const owner = (session && session.user && session.user.email) || '';
@@ -21,7 +20,7 @@ const ListPage = async () => {
       owner,
     },
   });
-  // console.log(stuff);
+
   return (
     <main>
       <Container id="list" fluid className="py-3">
@@ -39,7 +38,16 @@ const ListPage = async () => {
               </thead>
               <tbody>
                 {stuff.map((item) => (
-                  <StuffItem key={item.id} {...item} />
+                  <tr key={item.id}>
+                    <td>{item.name}</td>
+                    <td>{item.quantity}</td>
+                    <td>{item.condition}</td>
+                    <td>
+                      {/* Add any action buttons or links here */}
+                      <button>Edit</button>
+                      <button>Delete</button>
+                    </td>
+                  </tr>
                 ))}
               </tbody>
             </Table>
