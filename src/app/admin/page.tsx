@@ -39,8 +39,8 @@ const AdminPage = async () => {
                     <td>{item.owner}</td>
                     <td>
                       {/* Add any action buttons or links here */}
-                      <button>Edit</button>
-                      <button>Delete</button>
+                      <button type="button">Edit</button>
+                      <button type="button">Delete</button>
                     </td>
                   </tr>
                 ))}

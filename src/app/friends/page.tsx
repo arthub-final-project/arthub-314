@@ -52,38 +52,40 @@ const Friends = () => (
                       border: '2px solid black',
                     }}
                   />
-                  <a href="#"
+                  <Button
+                    href="#"
                     className="ms-2"
+                    variant="link"
                     style={{
                       textDecoration: 'none',
                       color: 'black',
                     }}
                   >
                     THAD
-                  </a>
-                  <a
-                    href='#'
-                    className="ms-5"
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
                     style={{
                       fontSize: 15,
-                      textDecoration: 'none'
+                      textDecoration: 'none',
                     }}
                   >
                     Followers
-                  </a>
-                  <a
-                    href='#'
-                    className="ms-4"
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
                     style={{
                       fontSize: 15,
-                      textDecoration: 'none'
+                      textDecoration: 'none',
                     }}
                   >
                     Friends
-                  </a>
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                <Image
+                  <Image
                     src="./THUD.jpg"
                     alt="Profile Pic"
                     style={{
@@ -92,38 +94,40 @@ const Friends = () => (
                       border: '2px solid black',
                     }}
                   />
-                  <a href="#"
+                  <Button
+                    href="#"
                     className="ms-2"
+                    variant="link"
                     style={{
                       textDecoration: 'none',
                       color: 'black',
                     }}
                   >
                     THAD
-                  </a>
-                  <a
-                    href='#'
-                    className="ms-5"
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
                     style={{
                       fontSize: 15,
-                      textDecoration: 'none'
+                      textDecoration: 'none',
                     }}
                   >
                     Followers
-                  </a>
-                  <a
-                    href='#'
-                    className="ms-4"
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
                     style={{
                       fontSize: 15,
-                      textDecoration: 'none'
+                      textDecoration: 'none',
                     }}
                   >
                     Friends
-                  </a>
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                <Image
+                  <Image
                     src="./THUD.jpg"
                     alt="Profile Pic"
                     style={{
@@ -132,38 +136,40 @@ const Friends = () => (
                       border: '2px solid black',
                     }}
                   />
-                  <a href="#"
+                  <Button
+                    href="#"
                     className="ms-2"
+                    variant="link"
                     style={{
                       textDecoration: 'none',
                       color: 'black',
                     }}
                   >
                     THAD
-                  </a>
-                  <a
-                    href='#'
-                    className="ms-5"
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
                     style={{
                       fontSize: 15,
-                      textDecoration: 'none'
+                      textDecoration: 'none',
                     }}
                   >
                     Followers
-                  </a>
-                  <a
-                    href='#'
-                    className="ms-4"
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
                     style={{
                       fontSize: 15,
-                      textDecoration: 'none'
+                      textDecoration: 'none',
                     }}
                   >
                     Friends
-                  </a>
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                <Image
+                  <Image
                     src="./THUD.jpg"
                     alt="Profile Pic"
                     style={{
@@ -172,38 +178,40 @@ const Friends = () => (
                       border: '2px solid black',
                     }}
                   />
-                  <a href="#"
+                  <Button
+                    href="#"
                     className="ms-2"
+                    variant="link"
                     style={{
                       textDecoration: 'none',
                       color: 'black',
                     }}
                   >
                     THAD
-                  </a>
-                  <a
-                    href='#'
-                    className="ms-5"
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
                     style={{
                       fontSize: 15,
-                      textDecoration: 'none'
+                      textDecoration: 'none',
                     }}
                   >
                     Followers
-                  </a>
-                  <a
-                    href='#'
-                    className="ms-4"
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
                     style={{
                       fontSize: 15,
-                      textDecoration: 'none'
+                      textDecoration: 'none',
                     }}
                   >
                     Friends
-                  </a>
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                <Image
+                  <Image
                     src="./THUD.jpg"
                     alt="Profile Pic"
                     style={{
@@ -212,38 +220,40 @@ const Friends = () => (
                       border: '2px solid black',
                     }}
                   />
-                  <a href="#"
+                  <Button
+                    href="#"
                     className="ms-2"
+                    variant="link"
                     style={{
                       textDecoration: 'none',
                       color: 'black',
                     }}
                   >
                     THAD
-                  </a>
-                  <a
-                    href='#'
-                    className="ms-5"
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
                     style={{
                       fontSize: 15,
-                      textDecoration: 'none'
+                      textDecoration: 'none',
                     }}
                   >
                     Followers
-                  </a>
-                  <a
-                    href='#'
-                    className="ms-4"
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
                     style={{
                       fontSize: 15,
-                      textDecoration: 'none'
+                      textDecoration: 'none',
                     }}
                   >
                     Friends
-                  </a>
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                <Image
+                  <Image
                     src="./THUD.jpg"
                     alt="Profile Pic"
                     style={{
@@ -252,120 +262,560 @@ const Friends = () => (
                       border: '2px solid black',
                     }}
                   />
-                  <a href="#"
+                  <Button
+                    href="#"
                     className="ms-2"
+                    variant="link"
                     style={{
                       textDecoration: 'none',
                       color: 'black',
                     }}
                   >
                     THAD
-                  </a>
-                  <a
-                    href='#'
-                    className="ms-5"
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
                     style={{
                       fontSize: 15,
-                      textDecoration: 'none'
+                      textDecoration: 'none',
                     }}
                   >
                     Followers
-                  </a>
-                  <a
-                    href='#'
-                    className="ms-4"
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
                     style={{
                       fontSize: 15,
-                      textDecoration: 'none'
+                      textDecoration: 'none',
                     }}
                   >
                     Friends
-                  </a>
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row justify-content-center align-items-center mt-5 ms-3">
-                  <a href="#">See All</a>
+                  <Button href="#" variant="link">
+                    See All
+                  </Button>
                 </Col>
               </div>
-              <div style={{ width: '333px', height: '500px', backgroundColor: 'white', border: '2px solid rgb(212, 212, 212)', borderRadius: '8px', }}>
-              <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                  <Image src= "./THUD.jpg" alt= "Profile Pic" style={{ width: "50px", height: "50px", border: "2px solid black" }} />
-                  <a href="#" className="ms-2" style={{ textDecoration: 'none', color: 'black' }}>THAD</a> 
-                  <a className="ms-5" style={{fontSize: 15, textDecoration: 'none'}}>Followers</a>
-                  <a className="ms-4" style={{fontSize: 15, textDecoration: 'none'}}>Friends</a>
+              <div style={{ width: '333px', height: '500px', backgroundColor: 'white', border: '2px solid rgb(212, 212, 212)', borderRadius: '8px' }}>
+                <Col className="d-flex flex-row align-items-center mt-3 ms-3">
+                  <Image
+                    src="./THUD.jpg"
+                    alt="Profile Pic"
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      border: '2px solid black',
+                    }}
+                  />
+                  <Button
+                    href="#"
+                    className="ms-2"
+                    variant="link"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    THAD
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Followers
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Friends
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                  <Image src= "./THUD.jpg" alt= "Profile Pic" style={{ width: "50px", height: "50px", border: "2px solid black" }} />
-                  <a href="#" className="ms-2" style={{ textDecoration: 'none', color: 'black' }}>THAD</a>
-                  <a className="ms-5" style={{fontSize: 15, textDecoration: 'none'}}>Followers</a>
-                  <a className="ms-4" style={{fontSize: 15, textDecoration: 'none'}}>Friends</a>
+                  <Image
+                    src="./THUD.jpg"
+                    alt="Profile Pic"
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      border: '2px solid black',
+                    }}
+                  />
+                  <Button
+                    href="#"
+                    className="ms-2"
+                    variant="link"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    THAD
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Followers
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Friends
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                  <Image src= "./THUD.jpg" alt= "Profile Pic" style={{ width: "50px", height: "50px", border: "2px solid black" }} />
-                  <a href="#" className="ms-2" style={{ textDecoration: 'none', color: 'black' }}>THAD</a>
-                  <a className="ms-5" style={{fontSize: 15, textDecoration: 'none'}}>Followers</a>
-                  <a className="ms-4" style={{fontSize: 15, textDecoration: 'none'}}>Friends</a>
+                  <Image
+                    src="./THUD.jpg"
+                    alt="Profile Pic"
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      border: '2px solid black',
+                    }}
+                  />
+                  <Button
+                    href="#"
+                    className="ms-2"
+                    variant="link"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    THAD
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Followers
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Friends
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                  <Image src= "./THUD.jpg" alt= "Profile Pic" style={{ width: "50px", height: "50px", border: "2px solid black" }} />
-                  <a href="#" className="ms-2" style={{ textDecoration: 'none', color: 'black' }}>THAD</a>
-                  <a className="ms-5" style={{fontSize: 15, textDecoration: 'none'}}>Followers</a>
-                  <a className="ms-4" style={{fontSize: 15, textDecoration: 'none'}}>Friends</a>
+                  <Image
+                    src="./THUD.jpg"
+                    alt="Profile Pic"
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      border: '2px solid black',
+                    }}
+                  />
+                  <Button
+                    href="#"
+                    className="ms-2"
+                    variant="link"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    THAD
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Followers
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Friends
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                  <Image src= "./THUD.jpg" alt= "Profile Pic" style={{ width: "50px", height: "50px", border: "2px solid black" }} />
-                  <a href="#" className="ms-2" style={{ textDecoration: 'none', color: 'black' }}>THAD</a>
-                  <a className="ms-5" style={{fontSize: 15, textDecoration: 'none'}}>Followers</a>
-                  <a className="ms-4" style={{fontSize: 15, textDecoration: 'none'}}>Friends</a>
+                  <Image
+                    src="./THUD.jpg"
+                    alt="Profile Pic"
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      border: '2px solid black',
+                    }}
+                  />
+                  <Button
+                    href="#"
+                    className="ms-2"
+                    variant="link"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    THAD
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Followers
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Friends
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                  <Image src= "./THUD.jpg" alt= "Profile Pic" style={{ width: "50px", height: "50px", border: "2px solid black" }} />
-                  <a href="#" className="ms-2" style={{ textDecoration: 'none', color: 'black' }}>THAD</a>
-                  <a className="ms-5" style={{fontSize: 15, textDecoration: 'none'}}>Followers</a>
-                  <a className="ms-4" style={{fontSize: 15, textDecoration: 'none'}}>Friends</a>
+                  <Image
+                    src="./THUD.jpg"
+                    alt="Profile Pic"
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      border: '2px solid black',
+                    }}
+                  />
+                  <Button
+                    href="#"
+                    className="ms-2"
+                    variant="link"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    THAD
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Followers
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Friends
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row justify-content-center align-items-center mt-5 ms-3">
-                  <a href="#">See All</a>
+                  <Button href="#" variant="link">
+                    See All
+                  </Button>
                 </Col>
               </div>
-              <div style={{ width: '333px', height: '500px', backgroundColor: 'white', border: '2px solid rgb(212, 212, 212)', borderRadius: '8px', }}>
-              <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                  <Image src= "./THUD.jpg" alt= "Profile Pic" style={{ width: "50px", height: "50px", border: "2px solid black" }} />
-                  <a href="#" className="ms-2" style={{ textDecoration: 'none', color: 'black' }}>THAD</a>
-                  <a className="ms-5" style={{fontSize: 15, textDecoration: 'none'}}>Followers</a>
-                  <a className="ms-4" style={{fontSize: 15, textDecoration: 'none'}}>Friends</a>
+              <div style={{ width: '333px', height: '500px', backgroundColor: 'white', border: '2px solid rgb(212, 212, 212)', borderRadius: '8px' }}>
+                <Col className="d-flex flex-row align-items-center mt-3 ms-3">
+                  <Image
+                    src="./THUD.jpg"
+                    alt="Profile Pic"
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      border: '2px solid black',
+                    }}
+                  />
+                  <Button
+                    href="#"
+                    className="ms-2"
+                    variant="link"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    THAD
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Followers
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Friends
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                  <Image src= "./THUD.jpg" alt= "Profile Pic" style={{ width: "50px", height: "50px", border: "2px solid black" }} />
-                  <a href="#" className="ms-2" style={{ textDecoration: 'none', color: 'black' }}>THAD</a>
-                  <a className="ms-5" style={{fontSize: 15, textDecoration: 'none'}}>Followers</a>
-                  <a className="ms-4" style={{fontSize: 15, textDecoration: 'none'}}>Friends</a>
+                  <Image
+                    src="./THUD.jpg"
+                    alt="Profile Pic"
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      border: '2px solid black',
+                    }}
+                  />
+                  <Button
+                    href="#"
+                    className="ms-2"
+                    variant="link"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    THAD
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Followers
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Friends
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                  <Image src= "./THUD.jpg" alt= "Profile Pic" style={{ width: "50px", height: "50px", border: "2px solid black" }} />
-                  <a href="#" className="ms-2" style={{ textDecoration: 'none', color: 'black' }}>THAD</a>
-                  <a className="ms-5" style={{fontSize: 15, textDecoration: 'none'}}>Followers</a>
-                  <a className="ms-4" style={{fontSize: 15, textDecoration: 'none'}}>Friends</a>
+                  <Image
+                    src="./THUD.jpg"
+                    alt="Profile Pic"
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      border: '2px solid black',
+                    }}
+                  />
+                  <Button
+                    href="#"
+                    className="ms-2"
+                    variant="link"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    THAD
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Followers
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Friends
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                  <Image src= "./THUD.jpg" alt= "Profile Pic" style={{ width: "50px", height: "50px", border: "2px solid black" }} />
-                  <a href="#" className="ms-2" style={{ textDecoration: 'none', color: 'black' }}>THAD</a>
-                  <a className="ms-5" style={{fontSize: 15, textDecoration: 'none'}}>Followers</a>
-                  <a className="ms-4" style={{fontSize: 15, textDecoration: 'none'}}>Friends</a>
+                  <Image
+                    src="./THUD.jpg"
+                    alt="Profile Pic"
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      border: '2px solid black',
+                    }}
+                  />
+                  <Button
+                    href="#"
+                    className="ms-2"
+                    variant="link"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    THAD
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Followers
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Friends
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                  <Image src= "./THUD.jpg" alt= "Profile Pic" style={{ width: "50px", height: "50px", border: "2px solid black" }} />
-                  <a href="#" className="ms-2" style={{ textDecoration: 'none', color: 'black' }}>THAD</a>
-                  <a className="ms-5" style={{fontSize: 15, textDecoration: 'none'}}>Followers</a>
-                  <a className="ms-4" style={{fontSize: 15, textDecoration: 'none'}}>Friends</a>
+                  <Image
+                    src="./THUD.jpg"
+                    alt="Profile Pic"
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      border: '2px solid black',
+                    }}
+                  />
+                  <Button
+                    href="#"
+                    className="ms-2"
+                    variant="link"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    THAD
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Followers
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Friends
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row align-items-center mt-3 ms-3">
-                  <Image src= "./THUD.jpg" alt= "Profile Pic" style={{ width: "50px", height: "50px", border: "2px solid black" }} />
-                  <a href="#" className="ms-2" style={{ textDecoration: 'none', color: 'black' }}>THAD</a>
-                  <a className="ms-5" style={{fontSize: 15, textDecoration: 'none'}}>Followers</a>
-                  <a className="ms-4" style={{fontSize: 15, textDecoration: 'none'}}>Friends</a>
+                  <Image
+                    src="./THUD.jpg"
+                    alt="Profile Pic"
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      border: '2px solid black',
+                    }}
+                  />
+                  <Button
+                    href="#"
+                    className="ms-2"
+                    variant="link"
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}
+                  >
+                    THAD
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Followers
+                  </Button>
+                  <Button
+                    href="#"
+                    variant="link"
+                    style={{
+                      fontSize: 15,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Friends
+                  </Button>
                 </Col>
                 <Col className="d-flex flex-row justify-content-center align-items-center mt-5 ms-3">
-                  <a href="#">See All</a>
+                  <Button href="#" variant="link">
+                    See All
+                  </Button>
                 </Col>
               </div>
             </Col>
@@ -392,7 +842,9 @@ const Friends = () => (
                 <h3>Artists you might know</h3>
               </Col>
               <Col className="d-flex flex-row justify-content-end me-1 mt-1">
-                <a href="#">See All</a>
+                <Button href="#" variant="link">
+                  See All
+                </Button>
               </Col>
             </Row>
           </div>
