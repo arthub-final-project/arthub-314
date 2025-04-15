@@ -1,6 +1,6 @@
+/* eslint-disable react/button-has-type */
 import { getServerSession } from 'next-auth';
 import { Col, Container, Row, Table } from 'react-bootstrap';
-import StuffItemAdmin from '@/components/StuffItemAdmin';
 import { prisma } from '@/lib/prisma';
 import { adminProtectedPage } from '@/lib/page-protection';
 import authOptions from '@/lib/authOptions';
@@ -33,7 +33,17 @@ const AdminPage = async () => {
               </thead>
               <tbody>
                 {stuff.map((item) => (
-                  <StuffItemAdmin key={item.id} {...item} />
+                  <tr key={item.id}>
+                    <td>{item.name}</td>
+                    <td>{item.quantity}</td>
+                    <td>{item.condition}</td>
+                    <td>{item.owner}</td>
+                    <td>
+                      {/* Add any action buttons or links here */}
+                      <button>Edit</button>
+                      <button>Delete</button>
+                    </td>
+                  </tr>
                 ))}
               </tbody>
             </Table>

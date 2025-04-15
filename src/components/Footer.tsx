@@ -5,12 +5,9 @@ const Footer = () => (
   <footer className="mt-auto py-3 bg-dark text-white">
     <Container>
       <Col className="text-center">
-        ArtHub
+        Created by Joshua, Darin, Justin, Keita, and Rolando
         <br />
-        The ArtHubbers
-        <br />
-        ICS 314
-        <br />
+        <a href="https://arthub-final-project.github.io/arthub-314/">Github page</a>
       </Col>
     </Container>
   </footer>
