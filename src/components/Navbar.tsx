@@ -13,13 +13,18 @@ const NavBar: React.FC = () => {
   // const userWithRole = session?.user as { email: string; randomKey: string };
   // const role = userWithRole?.randomKey;
   // const pathName = usePathname();
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    window.location.href = '/artworks'; // Redirect to the search page
+  };
+
   return (
     <Navbar bg="dark" expand="lg">
       <Container>
         <Navbar.Brand href="/">ArtHub</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Form className="d-flex">
+          <Form className="d-flex" onSubmit={handleSearch}>
             <FormControl
               type="search"
               placeholder="Explore..."
@@ -31,7 +36,7 @@ const NavBar: React.FC = () => {
               <Search color="white" />
             </Button>
           </Form>
-          <Nav className="me-auto">
+          <Nav className="ms-4">
             <Nav.Link href="/friends">Friends</Nav.Link>
           </Nav>
           <Nav className="ms-auto justify-content-end">
