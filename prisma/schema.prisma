@@ -10,11 +10,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  // for local development
-  url      = env("DATABASE_URL")
-  // for Vercel
-  // url       = env("POSTGRES_PRISMA_URL")
-  // directUrl = env("POSTGRES_URL_NON_POOLING")
+  url       = "postgres://postgres.vcyjxkiaowtafkuhvnhz:LMUPWH9kU7LScQGL@aws-0-us-west-1.pooler.supabase.com:6543/postgres?sslmode=require&supa=base-pooler.x"
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 enum Role {
