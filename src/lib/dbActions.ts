@@ -74,7 +74,7 @@ export async function createUser(credentials: { email: string; password: string;
     data: {
       email: credentials.email,
       password,
-      role: credentials.role as Role | 'Collector',
+role: credentials.role ?? 'Collector',
     },
   });
 }
@@ -94,5 +94,20 @@ export async function changePassword(credentials: { email: string; oldpassword: 
   await prisma.user.update({
     where: { email: credentials.email },
     data: { password: hashedPassword },
+  });
+}
+
+export async function addGalleryItem(item: {
+  title: string;
+  imageUrl: string;
+  userId: number;
+}) {
+  await prisma.galleryItem.create({
+    data: {
+      title: item.title,
+      imageUrl: item.imageUrl,
+      userId: item.userId,
+      createdAt: new Date(), // optional — Prisma defaults to now()
+    },
   });
 }
