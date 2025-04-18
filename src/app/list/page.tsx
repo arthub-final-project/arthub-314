@@ -1,11 +1,8 @@
-/* eslint-disable react/button-has-type */
 import { getServerSession } from 'next-auth';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Table } from 'react-bootstrap';
+import { prisma } from '@/lib/prisma';
 import { loggedInProtectedPage } from '@/lib/page-protection';
 import authOptions from '@/lib/authOptions';
-import { Profile } from '@prisma/client';
-import ProfileCard from '@/components/ProfileCard';
-import { prisma } from '@/lib/prisma';
 
 /** Render a list of stuff for the logged in user. */
 const ListPage = async () => {
@@ -16,31 +13,45 @@ const ListPage = async () => {
       user: { email: string; id: string; randomKey: string };
     } | null,
   );
-  const owner = session?.user!.email ? session.user.email : '';
-  const profiles: Profile[] = await prisma.profile.findMany({
+  const owner = (session && session.user && session.user.email) || '';
+  const stuff = await prisma.stuff.findMany({
     where: {
       owner,
     },
   });
 
-  console.log(profiles);
   return (
     <main>
       <Container id="list" fluid className="py-3">
-        <Container>
-          <Row>
-            <Col>
-              <h1 className="text-center">Artist Profiles</h1>
-              <Row xs={1} md={2} lg={3} className="g-4">
-                {profiles.map((profile) => (
-                  <Col key={profile.name}>
-                    <ProfileCard profile={profile} />
-                  </Col>
+        <Row>
+          <Col>
+            <h1>Stuff</h1>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Condition</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stuff.map((item) => (
+                  <tr key={item.id}>
+                    <td>{item.name}</td>
+                    <td>{item.quantity}</td>
+                    <td>{item.condition}</td>
+                    <td>
+                      {/* Add any action buttons or links here */}
+                      <button type="button">Edit</button>
+                      <button type="button">Delete</button>
+                    </td>
+                  </tr>
                 ))}
-              </Row>
-            </Col>
-          </Row>
-        </Container>
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
       </Container>
     </main>
   );

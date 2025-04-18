@@ -41,7 +41,7 @@ const Home = () => (
           <Row>
             <Col>
               <Container>
-                <Button variant="info" href="/eventsPage">
+                <Button variant="info" href="/events">
                   see more events
                 </Button>
               </Container>
