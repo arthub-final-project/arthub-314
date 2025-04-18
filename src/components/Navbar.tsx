@@ -1,16 +1,18 @@
+/* eslint-disable react/jsx-indent, @typescript-eslint/indent */
+
 'use client';
 
 import { useSession } from 'next-auth/react';
-// import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { BoxArrowRight, Lock, PersonFill, PersonPlusFill, Search } from 'react-bootstrap-icons';
 
 const NavBar: React.FC = () => {
   const { data: session } = useSession();
   const currentUser = session?.user?.email;
-  // const userWithRole = session?.user as { email: string; randomKey: string };
-  // const role = userWithRole?.randomKey;
-  // const pathName = usePathname();
+  const userWithRole = session?.user as { email: string; randomKey: string };
+  const role = userWithRole?.randomKey;
+  const pathName = usePathname();
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the default form submission behavior
     window.location.href = '/artworks'; // Redirect to the search page
@@ -36,6 +38,25 @@ const NavBar: React.FC = () => {
           </Form>
           <Nav className="ms-4">
             <Nav.Link href="/friends">Friends</Nav.Link>
+          </Nav>
+          <Nav className="me-auto justify-content-start">
+            {currentUser
+              ? [
+                  <Nav.Link id="add-stuff-nav" href="/add" key="add" active={pathName === '/add'}>
+                    Add Profile
+                  </Nav.Link>,
+                  <Nav.Link id="list-stuff-nav" href="/list" key="list" active={pathName === '/list'}>
+                    Artist Profiles
+                  </Nav.Link>,
+                ]
+              : ''}
+            {currentUser && role === 'ADMIN' ? (
+              <Nav.Link id="admin-stuff-nav" href="/admin" key="admin" active={pathName === '/admin'}>
+                Admin
+              </Nav.Link>
+            ) : (
+              ''
+            )}
           </Nav>
           <Nav className="ms-auto justify-content-end">
             {session ? (
