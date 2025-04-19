@@ -1,11 +1,12 @@
 import { getServerSession } from 'next-auth';
 import { notFound } from 'next/navigation';
-import { Stuff } from '@prisma/client';
+import { Profile } from '@prisma/client';
 import authOptions from '@/lib/authOptions';
 import { loggedInProtectedPage } from '@/lib/page-protection';
 import { prisma } from '@/lib/prisma';
+import EditProfileForm from '@/components/EditProfileForm';
 
-export default async function EditStuffPage({ params }: { params: { id: string | string[] } }) {
+export default async function EditProfilePage({ params }: { params: { id: string | string[] } }) {
   // Protect the page, only logged in users can access it.
   const session = await getServerSession(authOptions);
   loggedInProtectedPage(
@@ -16,15 +17,17 @@ export default async function EditStuffPage({ params }: { params: { id: string |
   );
   const id = Number(Array.isArray(params?.id) ? params?.id[0] : params?.id);
   // console.log(id);
-  const stuff: Stuff | null = await prisma.stuff.findUnique({
+  const profile: Profile | null = await prisma.profile.findUnique({
     where: { id },
   });
   // console.log(stuff);
-  if (!stuff) {
+  if (!profile) {
     return notFound();
   }
 
   return (
-    <main />
+    <main>
+      <EditProfileForm profile={profile} />
+    </main>
   );
 }

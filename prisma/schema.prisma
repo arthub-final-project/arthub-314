@@ -24,20 +24,26 @@ model User {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
-  role     Role   
+  role     Role   @default(Artist)
+   galleryItems GalleryItem[]
 }
 
-enum Condition {
-  excellent
-  good
-  fair
-  poor
+model GalleryItem {
+  id        String   @id @default(cuid())
+  title     String
+  imageUrl  String
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
 }
 
-model Stuff {
-  id        Int       @id @default(autoincrement())
-  name      String
-  quantity  Int
-  condition Condition @default(good)
-  owner     String
+model Profile {
+  id              Int       @id @default(autoincrement())
+  name            String
+  contact         String
+  image           String
+  socialMedia     String
+  artpiece        String
+  description     String
+  owner           String
 }
