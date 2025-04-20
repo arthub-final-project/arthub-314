@@ -52,7 +52,7 @@ const AddProfileForm: React.FC = () => {
     reset,
     formState: { errors },
   } = useForm<FormInputs>({
-    resolver: yupResolver(AddProfileSchema),
+    resolver: yupResolver<FormInputs>(AddProfileSchema),
   });
 
   if (status === 'loading') {

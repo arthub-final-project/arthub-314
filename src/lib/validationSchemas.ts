@@ -47,7 +47,7 @@ export const AddProfileSchema = Yup.object({
     .required('Image is required')
     .test('fileExists', 'Image is required', (value: unknown) => {
       const fileList = value as FileList | void;
-      return fileList && fileList.length > 0; // Check if there's at least one file
+      return fileList && fileList.length > 0;
     })
     .test('fileType', 'Unsupported file format', (value: unknown) => {
       const fileList = value as FileList | void;
@@ -62,7 +62,7 @@ export const AddProfileSchema = Yup.object({
     .required('Artpiece is required')
     .test('fileExists', 'Artpiece is required', (value: unknown) => {
       const fileList = value as FileList | void;
-      return fileList && fileList.length > 0; // Check if there's at least one file
+      return fileList && fileList.length > 0;
     })
     .test('fileType', 'Unsupported file format', (value: unknown) => {
       const fileList = value as FileList | void;
@@ -75,6 +75,16 @@ export const AddProfileSchema = Yup.object({
   description: Yup.string().required('Description is required'),
   owner: Yup.string().required('Owner is required'),
 });
+
+export type FormInputs = {
+  name: string;
+  contact: string;
+  image: FileList;
+  socialMedia: string;
+  artpiece: FileList;
+  description: string;
+  owner: string;
+};
 
 export const EditStuffSchema = Yup.object({
   id: Yup.number().required(),
