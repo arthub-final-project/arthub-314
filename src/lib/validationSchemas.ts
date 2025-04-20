@@ -4,10 +4,38 @@ export interface Event {
   id: string;
   firstName: string;
   lastName: string;
-  address: string; // This is like 'OAHU'
+  address: string;
   description: string;
   image: string;
 }
+
+export type FormInputs = {
+  name: string;
+  contact: string;
+  image: FileList;
+  socialMedia: string;
+  artpiece: FileList;
+  description: string;
+  owner: string;
+};
+
+const fileSchema = Yup.mixed<FileList>()
+  .required('File is required')
+  .test('fileExists', 'File is required', (value): value is FileList => value instanceof FileList && value.length > 0)
+  .test('fileType', 'Unsupported file format', (value): value is FileList => (
+    value instanceof FileList &&
+      ['image/png', 'image/jpg', 'image/jpeg'].includes(value[0]?.type)
+  ));
+
+export const AddProfileSchema: Yup.ObjectSchema<FormInputs> = Yup.object({
+  name: Yup.string().required('Name is required'),
+  contact: Yup.string().required('Contact is required'),
+  image: fileSchema,
+  socialMedia: Yup.string().required('Social media is required'),
+  artpiece: fileSchema,
+  description: Yup.string().required('Description is required'),
+  owner: Yup.string().required('Owner is required'),
+});
 
 export const AddGalleryItemSchema = Yup.object({
   title: Yup.string().required('Title is required'),
@@ -40,52 +68,6 @@ export const AddStuffSchema = Yup.object({
   owner: Yup.string().required(),
 });
 
-export const AddProfileSchema = Yup.object({
-  name: Yup.string().required('Name is required'),
-  contact: Yup.string().required('Contact is required'),
-  image: Yup.mixed()
-    .required('Image is required')
-    .test('fileExists', 'Image is required', (value: unknown) => {
-      const fileList = value as FileList | void;
-      return fileList && fileList.length > 0;
-    })
-    .test('fileType', 'Unsupported file format', (value: unknown) => {
-      const fileList = value as FileList | void;
-      return (
-        fileList &&
-        fileList[0] &&
-        ['image/png', 'image/jpg', 'image/jpeg'].includes(fileList[0].type)
-      );
-    }),
-  socialMedia: Yup.string().required('Social media is required'),
-  artpiece: Yup.mixed()
-    .required('Artpiece is required')
-    .test('fileExists', 'Artpiece is required', (value: unknown) => {
-      const fileList = value as FileList | void;
-      return fileList && fileList.length > 0;
-    })
-    .test('fileType', 'Unsupported file format', (value: unknown) => {
-      const fileList = value as FileList | void;
-      return (
-        fileList &&
-        fileList[0] &&
-        ['image/png', 'image/jpg', 'image/jpeg'].includes(fileList[0].type)
-      );
-    }),
-  description: Yup.string().required('Description is required'),
-  owner: Yup.string().required('Owner is required'),
-});
-
-export type FormInputs = {
-  name: string;
-  contact: string;
-  image: FileList;
-  socialMedia: string;
-  artpiece: FileList;
-  description: string;
-  owner: string;
-};
-
 export const EditStuffSchema = Yup.object({
   id: Yup.number().required(),
   name: Yup.string().required(),
@@ -99,38 +81,30 @@ export const EditProfileSchema = Yup.object().shape({
   contact: Yup.string().required('Contact is required'),
   socialMedia: Yup.string().required('Social media is required'),
   description: Yup.string().required('Description is required'),
-
   image: Yup.mixed()
     .test('image-required', 'Image is required', function (value) {
       const contextImage = this.options.context?.image;
-      // If no new image is selected, but there's an existing one, it's valid
-      if ((value instanceof FileList && value.length > 0) || contextImage) {
-        return true;
-      }
-      return false; // If neither is present, it's required
+      if ((value instanceof FileList && value.length > 0) || contextImage) return true;
+      return false;
     })
     .test('image-type', 'Unsupported file format', function (value) {
       const fileList = value as FileList | null;
       if (fileList && fileList[0]) {
         return ['image/png', 'image/jpg', 'image/jpeg'].includes(fileList[0].type);
       }
-      return true; // Skip validation if no file is selected (i.e., if context is used)
+      return true;
     }),
-
   artpiece: Yup.mixed()
     .test('artpiece-required', 'Artpiece is required', function (value) {
       const contextArtpiece = this.options.context?.artpiece;
-      // If no new artpiece is selected, but there's an existing one, it's valid
-      if ((value instanceof FileList && value.length > 0) || contextArtpiece) {
-        return true;
-      }
-      return false; // If neither is present, it's required
+      if ((value instanceof FileList && value.length > 0) || contextArtpiece) return true;
+      return false;
     })
     .test('artpiece-type', 'Unsupported file format', function (value) {
       const fileList = value as FileList | null;
       if (fileList && fileList[0]) {
         return ['image/png', 'image/jpg', 'image/jpeg'].includes(fileList[0].type);
       }
-      return true; // Skip validation if no file is selected (i.e., if context is used)
+      return true;
     }),
 });
