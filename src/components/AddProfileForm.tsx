@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
-import { useForm } from 'react-hook-form';
+import { useForm, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import swal from 'sweetalert';
 import { redirect } from 'next/navigation';
@@ -52,7 +52,7 @@ const AddProfileForm: React.FC = () => {
     reset,
     formState: { errors },
   } = useForm<FormInputs>({
-    resolver: yupResolver<FormInputs>(AddProfileSchema),
+    resolver: yupResolver(AddProfileSchema) as Resolver<FormInputs>,
   });
 
   if (status === 'loading') {
