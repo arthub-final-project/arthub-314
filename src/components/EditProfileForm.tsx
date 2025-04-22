@@ -8,11 +8,9 @@ import { Profile } from '@prisma/client';
 import { EditProfileSchema } from '@/lib/validationSchemas';
 import { editProfile } from '@/lib/dbActions';
 import { useEffect, useState } from 'react';
+import { InferType } from 'yup';
 
-type FormInputs = Profile & {
-  image: FileList | string;
-  artpiece: FileList | string;
-};
+type FormInputs = InferType<typeof EditProfileSchema>;
 
 const fileToBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
   const reader = new FileReader();
@@ -34,9 +32,12 @@ const EditProfileForm = ({ profile }: { profile: Profile }) => {
   } = useForm<FormInputs>({
     resolver: yupResolver(EditProfileSchema),
     defaultValues: {
-      ...profile,
-      image: '', // Will be handled manually
-      artpiece: '', // Will be handled manually
+      name: profile.name,
+      contact: profile.contact,
+      image: undefined as unknown as FileList,
+      socialMedia: profile.socialMedia,
+      artpiece: undefined as unknown as FileList,
+      description: profile.description,
     },
   });
 
@@ -80,6 +81,8 @@ const EditProfileForm = ({ profile }: { profile: Profile }) => {
         ...data,
         image: imageUrl,
         artpiece: artpieceUrl,
+        id: 0,
+        owner: '', // Assuming owner is not editable here
       });
 
       swal('Success', 'Your profile has been updated', 'success', {
@@ -100,8 +103,8 @@ const EditProfileForm = ({ profile }: { profile: Profile }) => {
           <Card>
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
-                <input type="hidden" {...register('id')} value={profile.id} />
-
+                <input type="hidden" {...register('id' as any)} value={profile.id} />
+                <input type="hidden" {...register('owner' as any)} value={profile.owner} />
                 <Row>
                   <Col>
                     <Form.Group className="mb-2">
@@ -192,7 +195,7 @@ const EditProfileForm = ({ profile }: { profile: Profile }) => {
                   <div className="invalid-feedback">{errors.description?.message}</div>
                 </Form.Group>
 
-                <input type="hidden" {...register('owner')} value={profile.owner} />
+                <input type="hidden" {...register('owner' as any)} value={profile.owner} />
 
                 <Row className="pt-3">
                   <Col>
