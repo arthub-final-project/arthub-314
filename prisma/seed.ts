@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('Seeding the database');
   const password = await hash('changeme', 10);
+
   config.defaultAccounts.forEach(async (account) => {
     const role = account.role as Role || Role.Artist;
     console.log(`  Creating user: ${account.email} with role: ${role}`);
@@ -19,24 +20,11 @@ async function main() {
         role,
       },
     });
-    // console.log(`  Created user: ${user.email} with role: ${user.role}`);
   });
-  for (const data of config.defaultData) {
-    const condition = data.condition as Condition || Condition.good;
-    console.log(`  Adding stuff: ${JSON.stringify(data)}`);
-    // eslint-disable-next-line no-await-in-loop
-    await prisma.stuff.upsert({
-      where: { id: config.defaultData.indexOf(data) + 1 },
-      update: {},
-      create: {
-        name: data.name,
-        quantity: data.quantity,
-        owner: data.owner,
-        condition,
-      },
-    });
-  }
+
+  // Removed config.defaultData and prisma.stuff references
 }
+
 main()
   .then(() => prisma.$disconnect())
   .catch(async (e) => {
@@ -44,6 +32,7 @@ main()
     await prisma.$disconnect();
     process.exit(1);
   });
+
 config.defaultProfiles.forEach(async (profile, index) => {
   console.log(`  Adding profile: ${profile.name}`);
   await prisma.profile.upsert({
