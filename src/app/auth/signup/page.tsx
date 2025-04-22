@@ -38,13 +38,26 @@ const SignUp = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = async (data: SignUpForm) => {
-    await createUser(data);
+const onSubmit = async (data: SignUpForm) => {
+  const res = await fetch('/api/auth/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  const result = await res.json();
+
+  if (result.success) {
     await signIn('credentials', {
       callbackUrl: '/add',
-      ...data,
+      email: data.email,
+      password: data.password,
     });
-  };
+  } else {
+    console.error('Signup error:', result.error);
+    // You could also show a toast or alert here
+  }
+};
 
   return (
     <main>
