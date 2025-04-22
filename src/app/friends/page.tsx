@@ -1,3 +1,5 @@
+/* eslint-disable no-alert */
+
 'use client';
 
 import { Col, Container, Image, Row, Button } from 'react-bootstrap';

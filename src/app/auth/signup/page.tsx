@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { Card, Col, Container, Button, Form, Row } from 'react-bootstrap';
-import { createUser } from '@/lib/dbActions';
 
 type SignUpForm = {
   email: string;
@@ -57,7 +56,7 @@ const SignUp = () => {
       console.error('Signup error:', result.error);
     // You could also show a toast or alert here
     }
-};
+  };
 
   return (
     <main>

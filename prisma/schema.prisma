@@ -28,27 +28,20 @@ model User {
 }
 
 model Profile {
-  id Int @id @default(autoincrement)
-  name String
-  contact String
-  image String
-  socialMedia String
-  artpiece String
-  description String
-  owner String 
-}
-
-enum Condition {
-  excellent
-  good
-  fair
-  poor
+  id              Int       @id @default(autoincrement())
+  name            String
+  contact         String
+  image           String
+  socialMedia     String
+  artpiece        String
+  description     String
+  owner           String
 }
 
 model Stuff {
-  id        Int       @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String
   quantity  Int
-  condition Condition @default(good)
   owner     String
+  condition String
 }
