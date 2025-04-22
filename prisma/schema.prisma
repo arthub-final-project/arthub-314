@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url       = "postgres://postgres.vcyjxkiaowtafkuhvnhz:LMUPWH9kU7LScQGL@aws-0-us-west-1.pooler.supabase.com:6543/postgres?sslmode=require&supa=base-pooler.x"
+  url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
@@ -24,26 +24,31 @@ model User {
   id       Int    @id @default(autoincrement())
   email    String @unique
   password String
-  role     Role   @default(Artist)
-   galleryItems GalleryItem[]
-}
-
-model GalleryItem {
-  id        String   @id @default(cuid())
-  title     String
-  imageUrl  String
-  createdAt DateTime @default(now())
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  role     Role   
 }
 
 model Profile {
-  id              Int       @id @default(autoincrement())
-  name            String
-  contact         String
-  image           String
-  socialMedia     String
-  artpiece        String
-  description     String
-  owner           String
+  id Int @id @default(autoincrement)
+  name String
+  contact String
+  image String
+  socialMedia String
+  artpiece String
+  description String
+  owner String 
+}
+
+enum Condition {
+  excellent
+  good
+  fair
+  poor
+}
+
+model Stuff {
+  id        Int       @id @default(autoincrement())
+  name      String
+  quantity  Int
+  condition Condition @default(good)
+  owner     String
 }
