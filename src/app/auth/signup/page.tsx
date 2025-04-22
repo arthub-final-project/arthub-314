@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { Card, Col, Container, Button, Form, Row } from 'react-bootstrap';
-import { createUser } from '@/lib/dbActions';
 
 type SignUpForm = {
   email: string;
@@ -38,26 +37,26 @@ const SignUp = () => {
     resolver: yupResolver(validationSchema),
   });
 
-const onSubmit = async (data: SignUpForm) => {
-  const res = await fetch('/api/auth/signup', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  });
-
-  const result = await res.json();
-
-  if (result.success) {
-    await signIn('credentials', {
-      callbackUrl: '/add',
-      email: data.email,
-      password: data.password,
+  const onSubmit = async (data: SignUpForm) => {
+    const res = await fetch('/api/auth/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
     });
-  } else {
-    console.error('Signup error:', result.error);
+
+    const result = await res.json();
+
+    if (result.success) {
+      await signIn('credentials', {
+        callbackUrl: '/add',
+        email: data.email,
+        password: data.password,
+      });
+    } else {
+      console.error('Signup error:', result.error);
     // You could also show a toast or alert here
-  }
-};
+    }
+  };
 
   return (
     <main>

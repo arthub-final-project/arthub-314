@@ -1,6 +1,6 @@
 'use server';
 
-import { Stuff, Condition, Profile, Role } from '@prisma/client';
+import { Stuff, Condition, Profile } from '@prisma/client';
 import { hash, compare } from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { prisma } from './prisma';

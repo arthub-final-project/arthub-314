@@ -50,3 +50,11 @@ model Profile {
   description     String
   owner           String
 }
+
+model Stuff {
+  id        Int      @id @default(autoincrement())
+  name      String
+  quantity  Int
+  owner     String
+  condition String
+}
