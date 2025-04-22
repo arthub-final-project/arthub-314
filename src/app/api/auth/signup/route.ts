@@ -1,8 +1,9 @@
+/* eslint-disable import/prefer-default-export */
 import { hash } from 'bcrypt';
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
-export default async function (req: Request) {
+export async function POST(req: Request) {
   const { email, password, role } = await req.json();
 
   try {
