@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 
 function CarouselFunc() {
   return (
-    <Carousel data-bs-theme="dark">
+    <Carousel data-bs-theme="dark" style={{ backgroundColor: 'white', borderRadius: '10px', border: '2px solid black' }}>
       <Carousel.Item>
         <img
           className="carousel-img"

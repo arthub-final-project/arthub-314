@@ -19,6 +19,15 @@ body {
 }
 #artworks-page {
   background-image: url('/BGLandscape.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#landing-page {
+  background-image: url('/BGLandscape.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 #friends-page {
   background-image: url('/cityLandscape.jpg');
