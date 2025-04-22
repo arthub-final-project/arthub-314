@@ -1,9 +1,11 @@
 'use server';
 
-import { Stuff, Condition, Profile } from '@prisma/client';
+import { Stuff, Profile } from '@prisma/client';
 import { hash, compare } from 'bcrypt';
 import { redirect } from 'next/navigation';
 import { prisma } from './prisma';
+
+type Condition = 'good' | 'poor' | 'excellent' | 'fair';
 
 /**
  * Adds a new stuff to the database.
