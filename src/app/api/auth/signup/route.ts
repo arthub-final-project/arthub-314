@@ -3,7 +3,7 @@ import { hash } from 'bcrypt';
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
-export default async function (req: Request) {
+export const POST = async function (req: Request) {
   const { email, password, role } = await req.json();
 
   try {
@@ -28,4 +28,4 @@ export default async function (req: Request) {
     console.error('[Signup API] Error creating user:', err);
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
   }
-}
+};
