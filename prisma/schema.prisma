@@ -5,6 +5,7 @@ generator client {
 datasource db {
   provider = "postgresql"
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
@@ -26,6 +27,12 @@ model User {
 }
 
 model User {
+=======
+  url      = env("DATABASE_URL")
+}
+
+model User {
+>>>>>>> Stashed changes
   id           Int           @id @default(autoincrement())
   email        String        @unique
   password     String
@@ -63,6 +70,7 @@ model Stuff {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 model GalleryItem {
   id        Int      @id @default(autoincrement())
   title     String
@@ -72,9 +80,14 @@ model GalleryItem {
   user      User     @relation(fields: [userId], references: [id])
 }
 =======
+=======
+>>>>>>> Stashed changes
 enum Role {
   Artist
   Collector
   ADMIN
 }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
