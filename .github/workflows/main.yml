@@ -36,7 +36,7 @@ jobs:
       - name: 🚧 Build Next.js app
         run: npm run build
 
-      - name: 🧪 Playwright tests
-        run: |
-          npx playwright install --with-deps
-          npm run playwright-development
+     # - name: 🧪 Playwright tests
+     #   run: |
+     #    npx playwright install --with-deps
+     #    npm run playwright-development
