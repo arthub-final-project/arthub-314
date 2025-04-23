@@ -26,6 +26,7 @@ model User {
   password String
   role     Role   
   galleryItems GalleryItem[]
+  profile      Profile?
 }
 
 model Profile {
@@ -36,7 +37,8 @@ model Profile {
   socialMedia     String
   artpiece        String
   description     String
-  owner           String
+  userId      Int    @unique
+  user        User   @relation(fields: [userId], references: [id])
 }
 
 model Stuff {
