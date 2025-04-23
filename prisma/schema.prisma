@@ -1,15 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+<<<<<<< Updated upstream
   url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
@@ -26,27 +21,48 @@ model User {
   password String
   role     Role   
   galleryItems GalleryItem[]
+=======
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  password     String
+  role         Role          @default(Artist)
+  galleryItems GalleryItem[]
+}
+
+model GalleryItem {
+  id        String   @id @default(cuid())
+  title     String
+  imageUrl  String
+  createdAt DateTime @default(now())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+>>>>>>> Stashed changes
 }
 
 model Profile {
-  id              Int       @id @default(autoincrement())
-  name            String
-  contact         String
-  image           String
-  socialMedia     String
-  artpiece        String
-  description     String
-  owner           String
+  id          Int    @id @default(autoincrement())
+  name        String
+  contact     String
+  image       String
+  socialMedia String
+  artpiece    String
+  description String
+  owner       String
 }
 
 model Stuff {
-  id        Int      @id @default(autoincrement())
+  id        Int    @id @default(autoincrement())
   name      String
   quantity  Int
   owner     String
   condition String
 }
 
+<<<<<<< Updated upstream
 model GalleryItem {
   id        Int      @id @default(autoincrement())
   title     String
@@ -55,3 +71,10 @@ model GalleryItem {
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
 }
+=======
+enum Role {
+  Artist
+  Collector
+  ADMIN
+}
+>>>>>>> Stashed changes
