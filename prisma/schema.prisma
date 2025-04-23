@@ -45,3 +45,12 @@ model Stuff {
   owner     String
   condition String
 }
+
+model GalleryItem {
+  id        Int      @id @default(autoincrement())
+  title     String
+  imageUrl  String
+  userId    Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
