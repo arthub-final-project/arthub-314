@@ -16,7 +16,8 @@ jobs:
       NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
       NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+     
     steps:
       - name: 📥 Checkout repository
         uses: actions/checkout@v3
