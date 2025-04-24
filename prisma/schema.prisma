@@ -18,7 +18,6 @@ model User {
 model GalleryItem {
   id        String   @id @default(cuid())
   title     String
-  description String
   imageUrl  String
   createdAt DateTime @default(now())
   userId    Int

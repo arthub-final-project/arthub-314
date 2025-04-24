@@ -13,7 +13,6 @@ export async function POST(req: NextRequest) {
 
   const formData = await req.formData();
   const title = formData.get('title') as string;
-  const description = formData.get('description') as string;
   const file = formData.get('image') as File;
 
   if (!file || !file.name) {
@@ -50,7 +49,6 @@ export async function POST(req: NextRequest) {
   await prisma.galleryItem.create({
     data: {
       title,
-      description,
       imageUrl,
       userId: user.id,
       createdAt: new Date(),
