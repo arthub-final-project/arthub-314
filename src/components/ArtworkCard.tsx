@@ -3,7 +3,12 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const ArtworkCard = () => (
+type ArtworkCardProps = {
+  title: string;
+  imageUrl: string;
+};
+
+const ArtworkCard: React.FC<ArtworkCardProps> = ({ title, imageUrl }) => (
   <Card
     bg="dark"
     style={{
@@ -25,13 +30,13 @@ const ArtworkCard = () => (
     >
       <Card.Img
         variant="top"
-        src="/medieval.webp"
+        src={imageUrl}
         alt="Click me"
         style={{ width: '100%', display: 'block' }}
       />
     </button>
     <Card.Body style={{ color: 'white', textAlign: 'center' }}>
-      <Card.Header as="h3" style={{ paddingTop: '0px' }}>Artwork Title</Card.Header>
+      <Card.Header as="h3" style={{ paddingTop: '0px' }}>{title}</Card.Header>
       <Card.Text as="h6" style={{ marginTop: '10px' }}>Artist Name</Card.Text>
     </Card.Body>
   </Card>
