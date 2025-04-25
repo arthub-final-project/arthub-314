@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AddGalleryItemSchema } from '@/lib/validationSchemas';
 
+export const dynamic = 'force-dynamic';
+
 interface UploadFormInputs {
   title: string;
   description: string;
