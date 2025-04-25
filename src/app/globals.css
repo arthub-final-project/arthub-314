@@ -18,19 +18,19 @@ body {
   height: 200px;
 }
 #artworks-page {
-  background-image: url('/BGLandscape.jpg');
-  background-size: cover;
+  background-color: #dcd0ac;
+  /*background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
 }
 #landing-page {
-  background-image: url('/BGLandscape.jpg');
+  background-image: url('/sunnyLake.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 #friends-page {
-  background-image: url('/cityLandscape.jpg');
+  background-image: url('/BGLandscape.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -57,6 +57,13 @@ body {
   color: lightblue !important;
 }
 
+.carousel-control-prev {
+  left: -40px !important; /* Adjust horizontal position */
+}
+.carousel-control-next {
+  right: -30px !important; /* Adjust horizontal position */
+}
+
 .square-wrapper {
   position: relative;
   width: 100%;
@@ -76,7 +83,8 @@ body {
   height: 300px;          /* fixed height to create a square */
   object-fit: cover;      /* crop the image to fill the box */
   border-radius: 12px;    /* rounded corners */
-  margin-left: 150px;     /* shift image to the right */
+  margin-left: 60px;     /* shift image to the right */
+  margin-top: 10px;      /* shift image to the bottom */
 }
 
 .carousel-username {
@@ -91,4 +99,12 @@ body {
   left: 0; /* Align it to the left */
   width: 100%;
   z-index: 1000; /* Ensure it appears above other content */
+}
+.text-outline {
+  color: white;
+  text-shadow:
+    -1px -1px 0 black,
+     1px -1px 0 black,
+    -1px  1px 0 black,
+     1px  1px 0 black;
 }
