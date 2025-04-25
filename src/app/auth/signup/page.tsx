@@ -54,7 +54,7 @@ const SignUp = () => {
       });
     } else {
       console.error('Signup error:', result.error);
-    // You could also show a toast or alert here
+      // You could also show a toast or alert here
     }
   };
 

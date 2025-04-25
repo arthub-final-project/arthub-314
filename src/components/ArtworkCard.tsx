@@ -4,7 +4,15 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 
 const ArtworkCard = () => (
-  <Card bg="dark" border="light" style={{ width: '20rem', padding: '0', borderWidth: '2px' }}>
+  <Card
+    bg="dark"
+    style={{
+      width: '20rem',
+      padding: '0',
+      borderWidth: '8px',
+      borderColor: '#6b623b',
+    }}
+  >
     <button
       type="button"
       style={{
