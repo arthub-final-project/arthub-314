@@ -58,3 +58,25 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ success: true });
 }
+
+/* This function grabs uploaded images from the supabase bucket */
+export async function GET() {
+  try {
+    const { data, error } = await supabase.storage
+      .from('gallery') // Access the "gallery" bucket
+      .list('', { limit: 10 }); // Get a list of files (limit as needed)
+
+    if (error) {
+      console.error('Error fetching data from Supabase storage:', error.message);
+      return NextResponse.json({ error: 'Failed to fetch images from storage' }, { status: 500 });
+    }
+
+    // Process the data to get the image URLs
+    const imageUrls = data?.map((file) => `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/gallery/${file.name}`);
+
+    return NextResponse.json(imageUrls); // Return the image URLs in the response
+  } catch (error) {
+    console.error('Error fetching gallery items:', error);
+    return NextResponse.json({ error: 'Failed to fetch gallery items' }, { status: 500 });
+  }
+}

@@ -22,8 +22,9 @@ const Artworks = () => {
 
   useEffect(() => {
     const fetchArtworks = async () => {
-      const response = await fetch('/api/gallery-items'); // Fetch data from your API route
+      const response = await fetch('/api/gallery/upload'); // Fetch data from your API route
       const data = await response.json();
+      console.log('Fetched data:', data);
       setArtworks(data);
     };
 
