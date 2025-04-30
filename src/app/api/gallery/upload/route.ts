@@ -62,21 +62,72 @@ export async function POST(req: NextRequest) {
 /* This function grabs uploaded images from the supabase bucket */
 export async function GET() {
   try {
-    const { data, error } = await supabase.storage
-      .from('gallery') // Access the "gallery" bucket
-      .list('', { limit: 10 }); // Get a list of files (limit as needed)
+    const items = await prisma.galleryItem.findMany({
+      orderBy: { createdAt: 'desc' }, // Optional: show newest first
+      select: {
+        id: true,
+        title: true,
+        imageUrl: true,
+      },
+    });
 
-    if (error) {
-      console.error('Error fetching data from Supabase storage:', error.message);
-      return NextResponse.json({ error: 'Failed to fetch images from storage' }, { status: 500 });
-    }
-
-    // Process the data to get the image URLs
-    const imageUrls = data?.map((file) => `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/gallery/${file.name}`);
-
-    return NextResponse.json(imageUrls); // Return the image URLs in the response
+    return NextResponse.json(items);
   } catch (error) {
     console.error('Error fetching gallery items:', error);
     return NextResponse.json({ error: 'Failed to fetch gallery items' }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+  const { searchParams } = req.nextUrl;
+  const id = searchParams.get('id');
+  if (!id) {
+    return NextResponse.json({ error: 'Missing or invalid ID' }, { status: 400 });
+  }
+  if (!session || !session.user?.email) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  if (Number.isNaN(id)) {
+    return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+  }
+
+  try {
+    // First fetch the gallery item to get the filename
+    const galleryItem = await prisma.galleryItem.findUnique({ where: { id } });
+
+    if (!galleryItem) {
+      return NextResponse.json({ error: 'Artwork not found' }, { status: 404 });
+    }
+
+    // Check if the current user is the owner
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    });
+
+    if (!user || galleryItem.userId !== Number(user.id)) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+
+    // Extract the filename from the URL
+    const fileName = galleryItem.imageUrl.split('/').pop()!;
+
+    // Delete from Supabase storage
+    const { error: storageError } = await supabase.storage
+      .from('gallery')
+      .remove([fileName]);
+
+    if (storageError) {
+      console.error('Error removing image from Supabase:', storageError);
+    }
+
+    // Delete from database
+    await prisma.galleryItem.delete({ where: { id } });
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting artwork:', error);
+    return NextResponse.json({ error: 'Failed to delete artwork' }, { status: 500 });
   }
 }

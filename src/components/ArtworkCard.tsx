@@ -1,14 +1,16 @@
 'use client';
 
+/* eslint-disable react/require-default-props */
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
 type ArtworkCardProps = {
   title: string;
   imageUrl: string;
+  onDelete?: () => void;
 };
 
-const ArtworkCard: React.FC<ArtworkCardProps> = ({ title, imageUrl }) => (
+const ArtworkCard: React.FC<ArtworkCardProps> = ({ title, imageUrl, onDelete }) => (
   <Card
     bg="dark"
     style={{
@@ -38,6 +40,11 @@ const ArtworkCard: React.FC<ArtworkCardProps> = ({ title, imageUrl }) => (
     <Card.Body style={{ color: 'white', textAlign: 'center' }}>
       <Card.Header as="h3" style={{ paddingTop: '0px' }}>{title}</Card.Header>
       <Card.Text as="h6" style={{ marginTop: '10px' }}>Artist Name</Card.Text>
+      {onDelete && (
+        <Button variant="danger" onClick={onDelete}>
+          Delete
+        </Button>
+      )}
     </Card.Body>
   </Card>
 );
