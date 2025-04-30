@@ -40,34 +40,34 @@ function CarouselFunc({ users }: { users: User[] }) {
 
         return (
           // eslint-disable-next-line react/no-array-index-key
-          <Carousel.Item key={index}>
+          <Carousel.Item style={{ paddingTop: '150px' }} key={index}>
             <Image
               src={user.profile?.image || '/placeholder.jpg'}
               alt={user.profile?.name || 'Unknown Artist'}
               className="rounded-circle"
-              width={100}
-              height={100}
-              style={{ objectFit: 'cover' }}
+              width={220}
+              height={220}
+              style={{ objectFit: 'cover', marginLeft: '200px', marginBottom: '70px' }}
             />
-            <h5 className="carousel-username mt-2">{user.profile?.name || 'Unknown Artist'}</h5>
+            <h4 className="carousel-username mt-2" style={{ marginLeft: '250px' }}>{user.profile?.name || 'Unknown Artist'}</h4>
 
             <Carousel.Caption className="carousel-top">
-              <Container style={{ maxWidth: '850px', minHeight: '250px', marginLeft: '250px' }}>
+              <Container style={{ maxWidth: '850px', minHeight: '250px', marginLeft: '250px', marginTop: '200px' }}>
                 <Row>
                   {/* Show first 3 gallery items */}
                   {user.galleryItems.slice(0, 3).map((item, i) => (
                     // eslint-disable-next-line react/no-array-index-key
                     <Col key={i}>
-                      <Container className="p-4 my-4">
+                      <div style={{ width: '400px', height: '400px', marginTop: '400px' }}>
                         <Image
                           className="gallery-img"
                           src={item.imageUrl}
                           alt={item.title}
-                          width={300}
-                          height={300}
-                          style={{ objectFit: 'cover' }}
+                          width={400}
+                          height={400}
+                          style={{ objectFit: 'cover', borderRadius: '10px' }}
                         />
-                      </Container>
+                      </div>
                     </Col>
                   ))}
                 </Row>
