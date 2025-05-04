@@ -48,6 +48,9 @@ const NavBar: React.FC = () => {
                   <Nav.Link id="list-stuff-nav" href="/list" key="list" active={pathName === '/list'}>
                     Artist Profiles
                   </Nav.Link>,
+                  <Nav.Link id="gallery-nav" href="/artworks" key="gallery" active={pathName === '/artworks'}>
+                    My Gallery
+                  </Nav.Link>,
                 ]
               : ''}
             {currentUser && role === 'ADMIN' ? (
