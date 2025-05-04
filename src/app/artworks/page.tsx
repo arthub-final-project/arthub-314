@@ -1,18 +1,9 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import ArtworkCard from '@/components/ArtworkCard';
-import { useEffect, useState } from 'react';
-import { createClient } from '@supabase/supabase-js';
 import { removeArtwork } from '@/lib/artworkActions';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-);
-if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-  throw new Error('Missing Supabase environment variables');
-}
 
 type Artwork = {
   id: string;
@@ -35,24 +26,25 @@ const Artworks = () => {
       setLoading(false); // Set loading to false when data is ready
     };
     fetchArtworks();
-
-    // Set up real-time listener. It checks for new artworks in the database and updates artworks page.
-    const channel = supabase
-      .channel('realtime:gallery_items') // Create a real-time channel
-      .on(
-        'postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'GalleryItem' },
-        (payload) => {
-          const newArtwork = payload.new as Artwork;
-          setArtworks((prev) => [...prev, newArtwork]); // Add the new artwork to the state
-        },
-      )
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
   }, []);
+
+  /* Set up real-time listener. It checks for new artworks in the database and updates artworks page.
+  const channel = supabase
+    .channel('realtime:gallery_items') // Create a real-time channel
+    .on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'GalleryItem' },
+      (payload) => {
+        const newArtwork = payload.new as Artwork;
+        setArtworks((prev) => [...prev, newArtwork]); // Add the new artwork to the state
+      },
+    )
+    .subscribe();
+
+  return () => {
+    supabase.removeChannel(channel);
+  };
+}, []); */
 
   const handleRemoveArtwork = async (id: string) => {
     // Ensure sessionStorage is available and the user is correctly fetched

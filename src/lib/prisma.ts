@@ -10,10 +10,12 @@ const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
 // eslint-disable-next-line import/prefer-default-export, operator-linebreak
 export const prisma =
-  // eslint-disable-next-line operator-linebreak
   globalForPrisma.prisma ||
   new PrismaClient({
-    log: ['query'], // CAM: is this the right level of logging?
+    log: ['query'],
+    datasourceUrl: process.env.DATABASE_URL?.includes('postgres')
+      ? `${process.env.DATABASE_URL}?pgbouncer=true&statement_cache_mode=describe`
+      : undefined,
   });
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;

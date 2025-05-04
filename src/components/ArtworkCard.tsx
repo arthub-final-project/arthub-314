@@ -11,6 +11,7 @@ type ArtworkCardProps = {
 };
 
 const ArtworkCard: React.FC<ArtworkCardProps> = ({ title, imageUrl, onDelete }) => (
+
   <Card
     bg="dark"
     style={{
