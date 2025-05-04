@@ -48,3 +48,41 @@ enum Role {
   Collector
   ADMIN
 }
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  role     Role   
+  galleryItems GalleryItem[]
+  profile      Profile?
+}
+
+model Profile {
+  id              Int       @id @default(autoincrement())
+  name            String
+  contact         String
+  image           String
+  socialMedia     String
+  artpiece        String
+  description     String
+  userId      Int    @unique
+  user        User   @relation(fields: [userId], references: [id])
+}
+
+model Stuff {
+  id        Int      @id @default(autoincrement())
+  name      String
+  quantity  Int
+  owner     String
+  condition String
+}
+
+model GalleryItem {
+  id        Int      @id @default(autoincrement())
+  title     String
+  imageUrl  String
+  userId    Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
