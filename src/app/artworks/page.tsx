@@ -87,6 +87,8 @@ const Artworks = () => {
     );
   }
 
+  console.log('Artworks being rendered:', artworks);
+
   return (
     <main>
       <Container id="artworks-page" fluid className="py-3" style={{ height: '110vh' }}>

@@ -51,7 +51,7 @@ const NavBar: React.FC = () => {
                   <Nav.Link id="list-stuff-nav" href="/upload" key="upload" active={pathName === '/upload'}>
                     Upload
                   </Nav.Link>,
-                  <Nav.Link id="gallery-nav" href="/artworks" key="gallery" active={pathName === '/artworks'}>
+                  <Nav.Link id="gallery-nav" href="/myGallery" key="gallery" active={pathName === '/artworks'}>
                     My Gallery
                   </Nav.Link>,
                 ]
