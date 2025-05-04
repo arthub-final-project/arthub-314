@@ -1,14 +1,17 @@
 'use client';
 
+/* eslint-disable react/require-default-props */
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
-interface ArtworkCardProps {
+type ArtworkCardProps = {
   title: string;
   imageUrl: string;
-}
+  onDelete?: () => void;
+};
 
-const ArtworkCard = ({ title, imageUrl }: ArtworkCardProps) => (
+const ArtworkCard: React.FC<ArtworkCardProps> = ({ title, imageUrl, onDelete }) => (
+
   <Card
     bg="dark"
     style={{
@@ -18,14 +21,31 @@ const ArtworkCard = ({ title, imageUrl }: ArtworkCardProps) => (
       borderColor: '#6b623b',
     }}
   >
-    <Card.Img
-      variant="top"
-      src={imageUrl}
-      alt={title}
-      style={{ width: '100%', display: 'block' }}
-    />
+    <button
+      type="button"
+      style={{
+        display: 'block',
+        background: 'none',
+        border: 'none',
+        padding: '0',
+        cursor: 'pointer',
+      }}
+    >
+      <Card.Img
+        variant="top"
+        src={imageUrl}
+        alt="Click me"
+        style={{ width: '100%', display: 'block' }}
+      />
+    </button>
     <Card.Body style={{ color: 'white', textAlign: 'center' }}>
       <Card.Header as="h3" style={{ paddingTop: '0px' }}>{title}</Card.Header>
+      <Card.Text as="h6" style={{ marginTop: '10px' }}>Artist Name</Card.Text>
+      {onDelete && (
+        <Button variant="danger" onClick={onDelete}>
+          Delete
+        </Button>
+      )}
     </Card.Body>
   </Card>
 );
