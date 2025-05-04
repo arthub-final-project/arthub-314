@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import ArtworkCard from '@/components/ArtworkCard';
+import { useEffect, useState } from 'react';
 import { removeArtwork } from '@/lib/artworkActions';
 
 type Artwork = {
@@ -11,39 +11,22 @@ type Artwork = {
   imageUrl: string;
 };
 
-/** The Artworks page. */
-const Artworks = () => {
+const MyGallery = () => {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL);
-    console.log('Supabase Key:', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
-    const fetchArtworks = async () => {
-      try {
-        const response = await fetch('/api/gallery/upload');
-        const data = await response.json();
-
-        if (!response.ok) {
-          console.error('Fetch failed:', data.error || data);
-          setArtworks([]); // fallback
-          return;
-        }
-
-        if (Array.isArray(data)) {
-          setArtworks(data);
-        } else {
-          console.error('Unexpected data format:', data);
-          setArtworks([]); // fallback
-        }
-      } catch (err) {
-        console.error('Error fetching artworks:', err);
-        setArtworks([]);
-      } finally {
+    const fetchGallery = async () => {
+      const res = await fetch('/api/gallery/list');
+      if (res.ok) {
+        const data = await res.json();
+        setArtworks(data);
         setLoading(false);
+      } else {
+        console.error('Failed to load gallery');
       }
     };
-    fetchArtworks();
+    fetchGallery();
   }, []);
 
   const handleRemoveArtwork = async (id: string) => {
@@ -73,7 +56,6 @@ const Artworks = () => {
     }
   };
 
-  // Shows a loading spinner while fetching data, customizable here
   if (loading) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh', backgroundColor: '#1e1e1e' }}>
@@ -107,4 +89,4 @@ const Artworks = () => {
   );
 };
 
-export default Artworks;
+export default MyGallery;
