@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import ArtworkCard from '@/components/ArtworkCard';
+import Link from 'next/link';
 
 interface GalleryItem {
   id: string;
@@ -30,6 +31,16 @@ const Artworks = () => {
   return (
     <main>
       <Container id="artworks-page" fluid className="py-3" style={{ minHeight: '110vh' }}>
+        {/* Upload button row */}
+        <Row className="mb-3 justify-content-end pe-4">
+          <Col xs="auto">
+            <Link href="/upload" passHref>
+              <button type="button" className="btn btn-primary rounded-pill">Upload New Artwork</button>
+            </Link>
+          </Col>
+        </Row>
+
+        {/* Gallery items */}
         <Row className="justify-content-center">
           {galleryItems ? (
             galleryItems.map((item) => (
