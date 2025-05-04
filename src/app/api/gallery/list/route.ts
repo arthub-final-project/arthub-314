@@ -24,6 +24,16 @@ export async function GET() {
     const items = await prisma.galleryItem.findMany({
       where: { userId: user.id },
       orderBy: { createdAt: 'desc' },
+      select: {
+        id: true,
+        title: true,
+        imageUrl: true,
+        user: {
+          select: {
+            email: true,
+          },
+        },
+      },
     });
     return NextResponse.json(items);
   } catch (error) {

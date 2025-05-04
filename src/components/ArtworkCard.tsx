@@ -7,10 +7,12 @@ import { Card, Button } from 'react-bootstrap';
 type ArtworkCardProps = {
   title: string;
   imageUrl: string;
+  artistEmail?: string;
   onDelete?: () => void;
+  showDeleteButton: boolean;
 };
 
-const ArtworkCard: React.FC<ArtworkCardProps> = ({ title, imageUrl, onDelete }) => (
+const ArtworkCard: React.FC<ArtworkCardProps> = ({ title, imageUrl, artistEmail, onDelete, showDeleteButton = true }) => (
 
   <Card
     bg="dark"
@@ -40,8 +42,8 @@ const ArtworkCard: React.FC<ArtworkCardProps> = ({ title, imageUrl, onDelete }) 
     </button>
     <Card.Body style={{ color: 'white', textAlign: 'center' }}>
       <Card.Header as="h3" style={{ paddingTop: '0px' }}>{title}</Card.Header>
-      <Card.Text as="h6" style={{ marginTop: '10px' }}>Artist Name</Card.Text>
-      {onDelete && (
+      <Card.Text as="h6" style={{ marginTop: '10px' }}>{artistEmail}</Card.Text>
+      {showDeleteButton && onDelete && (
         <Button variant="danger" onClick={onDelete}>
           Delete
         </Button>

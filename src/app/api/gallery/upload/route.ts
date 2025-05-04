@@ -68,6 +68,11 @@ export async function GET() {
         id: true,
         title: true,
         imageUrl: true,
+        user: {
+          select: {
+            email: true,
+          },
+        },
       },
     });
 

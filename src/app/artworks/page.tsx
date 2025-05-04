@@ -1,14 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import ArtworkCard from '@/components/ArtworkCard';
-import { removeArtwork } from '@/lib/artworkActions';
 
 type Artwork = {
   id: string;
   title: string;
   imageUrl: string;
+  user: {
+    email: string;
+  };
 };
 
 /** The Artworks page. */
@@ -46,33 +48,6 @@ const Artworks = () => {
     fetchArtworks();
   }, []);
 
-  const handleRemoveArtwork = async (id: string) => {
-    // Ensure sessionStorage is available and the user is correctly fetched
-    console.log('Attempting to remove artwork with ID:', id);
-    if (typeof window !== 'undefined') {
-      const userJson = sessionStorage.getItem('user');
-      if (!userJson) {
-        console.error('No user found in sessionStorage');
-        return;
-      }
-      const user = JSON.parse(userJson);
-
-      try {
-        // Call the removeArtwork function and pass the necessary parameters
-        const response = await removeArtwork(id, user.id);
-
-        if (response.success) {
-          // Update the state to remove the deleted artwork
-          setArtworks((prevArtworks) => prevArtworks.filter((artwork) => artwork.id !== id));
-        } else {
-          console.error('Failed to remove artwork:', response.error);
-        }
-      } catch (error) {
-        console.error('Error during artwork removal:', error);
-      }
-    }
-  };
-
   // Shows a loading spinner while fetching data, customizable here
   if (loading) {
     return (
@@ -91,17 +66,26 @@ const Artworks = () => {
 
   return (
     <main>
-      <Container id="artworks-page" fluid className="py-3" style={{ height: '110vh' }}>
-        <Row className="justify-content-start flex-wrap">
+      <Container id="artworks-page" fluid className="py-3 d-flex justify-content-center" style={{ minHeight: '100vh' }}>
+        <Row
+          style={{
+            margin: '0 auto',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+            gap: '5rem',
+            width: '75%',
+            justifyContent: 'center',
+          }}
+        >
           {artworks.map((artwork) => (
-            <Col key={artwork.id} xs={6} md={2} className="mb-4 ms-5">
+            <div key={artwork.id} className="col-sm-6">
               <ArtworkCard
-                key={artwork.id}
                 title={artwork.title}
                 imageUrl={artwork.imageUrl}
-                onDelete={() => handleRemoveArtwork(artwork.id)}
+                artistEmail={artwork.user?.email || ''}
+                showDeleteButton={false}
               />
-            </Col>
+            </div>
           ))}
         </Row>
       </Container>
