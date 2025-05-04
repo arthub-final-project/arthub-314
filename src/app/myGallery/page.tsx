@@ -1,6 +1,6 @@
 'use client';
 
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import ArtworkCard from '@/components/ArtworkCard';
 import { useEffect, useState } from 'react';
 import { removeArtwork } from '@/lib/artworkActions';
@@ -9,6 +9,9 @@ type Artwork = {
   id: string;
   title: string;
   imageUrl: string;
+  user: {
+    email: string;
+  };
 };
 
 const MyGallery = () => {
@@ -71,17 +74,27 @@ const MyGallery = () => {
 
   return (
     <main>
-      <Container id="artworks-page" fluid className="py-3" style={{ height: '110vh' }}>
-        <Row className="justify-content-start flex-wrap">
+      <Container id="artworks-page" fluid className="py-3 d-flex justify-content-center" style={{ minHeight: '100vh' }}>
+        <Row
+          style={{
+            margin: '0 auto',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+            gap: '5rem',
+            width: '75%',
+            justifyContent: 'center',
+          }}
+        >
           {artworks.map((artwork) => (
-            <Col key={artwork.id} xs={6} md={2} className="mb-4 ms-5">
+            <div key={artwork.id} className="col-sm-6">
               <ArtworkCard
-                key={artwork.id}
                 title={artwork.title}
                 imageUrl={artwork.imageUrl}
+                artistEmail={artwork.user.email}
                 onDelete={() => handleRemoveArtwork(artwork.id)}
+                showDeleteButton
               />
-            </Col>
+            </div>
           ))}
         </Row>
       </Container>
