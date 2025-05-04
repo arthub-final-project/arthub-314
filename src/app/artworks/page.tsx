@@ -82,7 +82,7 @@ const Artworks = () => {
               <ArtworkCard
                 title={artwork.title}
                 imageUrl={artwork.imageUrl}
-                artistEmail={artwork.user.email}
+                artistEmail={artwork.user?.email || ''}
                 showDeleteButton={false}
               />
             </div>

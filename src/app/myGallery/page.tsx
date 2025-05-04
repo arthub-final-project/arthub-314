@@ -85,17 +85,19 @@ const MyGallery = () => {
             justifyContent: 'center',
           }}
         >
-          {artworks.map((artwork) => (
-            <div key={artwork.id} className="col-sm-6">
-              <ArtworkCard
-                title={artwork.title}
-                imageUrl={artwork.imageUrl}
-                artistEmail={artwork.user.email}
-                onDelete={() => handleRemoveArtwork(artwork.id)}
-                showDeleteButton
-              />
-            </div>
-          ))}
+          {artworks
+            .filter((artwork) => artwork.user && artwork.user.email)
+            .map((artwork) => (
+              <div key={artwork.id} className="col-sm-6">
+                <ArtworkCard
+                  title={artwork.title}
+                  imageUrl={artwork.imageUrl}
+                  artistEmail={artwork.user?.email || ''}
+                  onDelete={() => handleRemoveArtwork(artwork.id)}
+                  showDeleteButton
+                />
+              </div>
+            ))}
         </Row>
       </Container>
     </main>
