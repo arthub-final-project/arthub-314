@@ -40,7 +40,7 @@ function CarouselFunc({ users }: { users: User[] }) {
 
         return (
           // eslint-disable-next-line react/no-array-index-key
-          <Carousel.Item style={{ paddingTop: '150px' }} key={index}>
+          <Carousel.Item style={{ paddingTop: '50px' }} key={index}>
             <Image
               src={user.profile?.image || '/placeholder.jpg'}
               alt={user.profile?.name || 'Unknown Artist'}
@@ -58,7 +58,7 @@ function CarouselFunc({ users }: { users: User[] }) {
                   {user.galleryItems.slice(0, 3).map((item, i) => (
                     // eslint-disable-next-line react/no-array-index-key
                     <Col key={i}>
-                      <div style={{ width: '400px', height: '400px', marginTop: '400px' }}>
+                      <div style={{ width: '40px', height: '250px', marginTop: '400px' }}>
                         <Image
                           className="gallery-img"
                           src={item.imageUrl}
