@@ -37,6 +37,7 @@ model Profile {
   socialMedia     String
   artpiece        String
   description     String
+  owner           String
   userId      Int    @unique
   user        User   @relation(fields: [userId], references: [id])
 }
