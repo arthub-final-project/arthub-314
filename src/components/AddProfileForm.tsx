@@ -28,14 +28,19 @@ const fileToBase64 = (file: File): Promise<string> => new Promise((resolve, reje
   reader.onerror = (error) => reject(error);
 });
 
-const onSubmit = async (data: FormInputs) => {
+const onSubmit = (session: any) => async (data: FormInputs) => {
   const imageFile = data.image[0];
   const artpieceFile = data.artpiece[0];
 
   const imageUrl = imageFile ? await fileToBase64(imageFile) : '';
   const artpieceUrl = artpieceFile ? await fileToBase64(artpieceFile) : '';
 
-  await addProfile({ ...data, image: imageUrl, artpiece: artpieceUrl });
+  const userId = session?.user?.id; // Assuming `id` is available in session.user
+  if (!userId) {
+    swal('Error', 'User ID is missing', 'error');
+    return;
+  }
+  await addProfile({ ...data, image: imageUrl, artpiece: artpieceUrl, userId });
 
   swal('Success', 'Your profile has been added', 'success', {
     timer: 2000,
@@ -72,7 +77,7 @@ const AddProfileForm: React.FC = () => {
           </Col>
           <Card>
             <Card.Body>
-              <Form onSubmit={handleSubmit(onSubmit)}>
+              <Form onSubmit={handleSubmit(onSubmit(session))}>
                 <Row>
                   <Col>
                     <Form.Group className="mb-2">
