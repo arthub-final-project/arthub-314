@@ -36,9 +36,6 @@ const NavBar: React.FC = () => {
               <Search color="white" />
             </Button>
           </Form>
-          <Nav className="ms-4">
-            <Nav.Link href="/friends">Friends</Nav.Link>
-          </Nav>
           <Nav className="me-auto justify-content-start">
             {currentUser
               ? [
@@ -54,12 +51,32 @@ const NavBar: React.FC = () => {
                   <Nav.Link id="gallery-nav" href="/myGallery" key="gallery" active={pathName === '/artworks'}>
                     My Gallery
                   </Nav.Link>,
+                  <Nav.Link href="/friends">
+                    Friends
+                  </Nav.Link>,
                 ]
               : ''}
             {currentUser && role === 'ADMIN' ? (
-              <Nav.Link id="admin-stuff-nav" href="/admin" key="admin" active={pathName === '/admin'}>
-                Admin
-              </Nav.Link>
+              <>
+                <Nav.Link id="add-stuff-nav" href="/add" key="add" active={pathName === '/add'}>
+                  Add Profile
+                </Nav.Link>
+                <Nav.Link id="list-stuff-nav" href="/list" key="list" active={pathName === '/list'}>
+                  Artist Profiles
+                </Nav.Link>
+                <Nav.Link id="list-stuff-nav" href="/upload" key="upload" active={pathName === '/upload'}>
+                  Upload
+                </Nav.Link>
+                <Nav.Link id="gallery-nav" href="/myGallery" key="gallery" active={pathName === '/artworks'}>
+                  My Gallery
+                </Nav.Link>
+                <Nav.Link href="/friends">
+                  Friends
+                </Nav.Link>
+                <Nav.Link id="admin-stuff-nav" href="/admin" key="admin" active={pathName === '/admin'}>
+                  Admin
+                </Nav.Link>
+              </>
             ) : (
               ''
             )}

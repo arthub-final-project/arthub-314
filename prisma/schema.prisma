@@ -7,14 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id           Int           @id @default(autoincrement())
-  email        String        @unique
-  password     String
-  role         Role          @default(Artist)
-  galleryItems GalleryItem[]
-}
-
 model GalleryItem {
   id        String   @id @default(cuid())
   title     String
@@ -22,25 +14,6 @@ model GalleryItem {
   createdAt DateTime @default(now())
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
-}
-
-model Profile {
-  id          Int    @id @default(autoincrement())
-  name        String
-  contact     String
-  image       String
-  socialMedia String
-  artpiece    String
-  description String
-  owner       String
-}
-
-model Stuff {
-  id        Int    @id @default(autoincrement())
-  name      String
-  quantity  Int
-  owner     String
-  condition String
 }
 
 enum Role {
@@ -69,21 +42,4 @@ model Profile {
   owner           String
   userId      Int    @unique
   user        User   @relation(fields: [userId], references: [id])
-}
-
-model Stuff {
-  id        Int      @id @default(autoincrement())
-  name      String
-  quantity  Int
-  owner     String
-  condition String
-}
-
-model GalleryItem {
-  id        Int      @id @default(autoincrement())
-  title     String
-  imageUrl  String
-  userId    Int
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
 }
