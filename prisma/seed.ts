@@ -18,7 +18,7 @@ async function main() {
   await prisma.user.create({
     data: {
       email: 'alice@example.com',
-      password,
+      password: '123456',
       role: 'Artist',
       profile: {
         create: {
@@ -44,7 +44,7 @@ async function main() {
   await prisma.user.create({
     data: {
       email: 'bob@example.com',
-      password,
+      password: '123456',
       role: 'Artist',
       profile: {
         create: {
@@ -70,7 +70,7 @@ async function main() {
   await prisma.user.create({
     data: {
       email: 'carla@example.com',
-      password,
+      password: '123456',
       role: 'Artist',
       profile: {
         create: {
