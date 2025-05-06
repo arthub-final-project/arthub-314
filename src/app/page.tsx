@@ -2,66 +2,64 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import CarouselComponent from '@/components/CarouseComponentl'; // Adjust the path as needed
-/** The Home page. */
-const Home = () => (
-  <main>
-    <Container id="landing-page" fluid className="py-3">
-      <Container>
+import CarouselComponent from '@/components/CarouseComponentl';
+import { useState, useEffect } from 'react';
+import { UserWithStuff } from './types/UserWithStuff';
+
+const Home = () => {
+  const [users, setUsers] = useState<UserWithStuff[] | null>(null);
+
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const res = await fetch('/api/users/featured');
+        console.log('📡 Fetched response:', res);
+
+        if (!res.ok) {
+          console.error(`❌ Failed to fetch users: ${res.status}`);
+          return;
+        }
+
+        const data = await res.json();
+        console.log('📦 Parsed users:', data);
+
+        setUsers(data);
+      } catch (err) {
+        console.error('💥 Fetch failed:', err);
+      }
+    }
+
+    fetchUsers();
+  }, []);
+  if (!users) return <p className="text-center">Loading...</p>;
+
+  return (
+    <main>
+      <Container id="landing-page" fluid className="py-3">
         <Row>
-          <h1 className="text-center text-outline">ArtHub Weekly Featured Artist Showcase</h1>
-          <CarouselComponent />
+          <h1 className="text-center">ArtHub Weekly Featured Artist Showcase</h1>
+          <CarouselComponent users={users} />
         </Row>
       </Container>
-      <Container
-        className=" p-4"
-        style={{
-          maxWidth: '1200px',
-          minHeight: '400px',
-        }}
-      >
+      <Container className="p-4" style={{ maxWidth: '1200px', minHeight: '400px' }}>
         <Row className="mt-4">
-          <h2 className="text-outline text-center ">Upcoming Events</h2>
+          <h2>Upcoming Events</h2>
         </Row>
         <Row>
           <Col>
-            <Container
-              className="border rounded p-4 my-4 bg-white"
-              style={{ width: '300px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+            <Container className="border rounded p-4 my-4">
               <b className="d-block mb-2">March 28-29th</b>
-              <img src="/eventExample3.jpg" alt="3" className="gallery-img" />
+              <img src="/eventexample3.jpg" alt="3" className="gallery-img" />
             </Container>
           </Col>
           <Col>
-            <Container
-              className="border rounded p-4 my-4 bg-white"
-              style={{ width: '300px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+            <Container className="border rounded p-4 my-4">
               <b className="d-block mb-2">April 12th</b>
               <img src="/eventExample1.jpg" alt="3" className="gallery-img" />
             </Container>
           </Col>
           <Col>
-            <Container
-              className="border rounded p-4 my-4 bg-white"
-              style={{ width: '300px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
+            <Container className="border rounded p-4 my-4">
               <b className="d-block mb-2">May 16-18th</b>
               <img src="/eventexample2.jpg" alt="3" className="gallery-img" />
             </Container>
@@ -71,13 +69,7 @@ const Home = () => (
           <Container>
             <Row>
               <Col>
-                <Container
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
+                <Container>
                   <Button variant="info" href="/eventsPage">
                     see more events
                   </Button>
@@ -87,8 +79,8 @@ const Home = () => (
           </Container>
         </Row>
       </Container>
-    </Container>
-  </main>
-);
+    </main>
+  );
+};
 
 export default Home;
