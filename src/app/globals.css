@@ -5,6 +5,7 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 }
 
 .wrapper {
@@ -74,6 +75,7 @@ body {
 .gallery-img {
   width: 200px;
   height: 200px;
+  max-width: 100%;
   object-fit: cover;
   border-radius: 8px; /* optional rounded corners */
 }

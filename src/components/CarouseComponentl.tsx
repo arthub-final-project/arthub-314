@@ -1,10 +1,12 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable react/no-array-index-key */
+
 'use client';
 
 import Carousel from 'react-bootstrap/Carousel';
 import { Col, Container, Row, Button } from 'react-bootstrap';
 import Image from 'next/image';
 
-// eslint-disable-next-line react/prop-types
 interface User {
   id: number;
   profile?: {
@@ -18,7 +20,6 @@ interface User {
 }
 
 function CarouselFunc({ users }: { users: User[] }) {
-  // 🔍 Initial check for empty or invalid user array
   if (!Array.isArray(users) || users.length === 0) {
     console.log('🛑 users is empty or not an array:', users);
     return (
@@ -29,56 +30,85 @@ function CarouselFunc({ users }: { users: User[] }) {
     );
   }
 
-  // 🔍 Log full users array
-  console.log('👥 USERS:', users);
-
   return (
-    <Carousel>
-      {users.map((user, index) => {
-        // 🔍 Log individual user's gallery items
-        console.log(`🎨 Gallery items for ${user.profile?.name || 'Unknown'}:`, user.galleryItems);
-
-        return (
-          // eslint-disable-next-line react/no-array-index-key
-          <Carousel.Item style={{ paddingTop: '50px' }} key={index}>
-            <Image
-              src={user.profile?.image || '/placeholder.jpg'}
-              alt={user.profile?.name || 'Unknown Artist'}
-              className="rounded-circle"
-              width={220}
-              height={220}
-              style={{ objectFit: 'cover', marginLeft: '200px', marginBottom: '70px' }}
-            />
-            <h4 className="carousel-username mt-2" style={{ marginLeft: '250px' }}>{user.profile?.name || 'Unknown Artist'}</h4>
-
-            <Carousel.Caption className="carousel-top">
-              <Container style={{ maxWidth: '850px', minHeight: '250px', marginLeft: '250px', marginTop: '200px' }}>
-                <Row>
-                  {/* Show first 3 gallery items */}
-                  {user.galleryItems.slice(0, 3).map((item, i) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <Col key={i}>
-                      <div style={{ width: '40px', height: '250px', marginTop: '400px' }}>
-                        <Image
-                          className="gallery-img"
-                          src={item.imageUrl}
-                          alt={item.title}
-                          width={400}
-                          height={400}
-                          style={{ objectFit: 'cover', borderRadius: '10px' }}
-                        />
-                      </div>
-                    </Col>
-                  ))}
-                </Row>
-              </Container>
-              <Button variant="info" href={`/profile/${user.id}`}>
-                See more from this artist
-              </Button>
-            </Carousel.Caption>
-          </Carousel.Item>
-        );
-      })}
+    <Carousel className="mb-5">
+      {users.map((user, index) => (
+        <Carousel.Item key={index}>
+          {/* Force the caption to behave like normal block content */}
+          <div style={{ position: 'static', textAlign: 'center' }}>
+            <Container>
+              {/* Gallery Images */}
+              <Row className="justify-content-center mb-2">
+                {user.galleryItems.slice(0, 3).map((item, i) => (
+                  <Col key={i} xs={12} sm={6} md={4} className="mb-1">
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.title}
+                      width={300}
+                      height={300}
+                      style={{
+                        objectFit: 'cover',
+                        borderRadius: '12px',
+                        maxWidth: '100%',
+                        height: 'auto',
+                      }}
+                    />
+                    <div>
+                      <p
+                        className="mt-2"
+                        style={{
+                          color: 'white',
+                          backgroundColor: 'rgba(34, 34, 34, 0.7)',
+                          borderRadius: '15px',
+                          padding: '10px',
+                          boxShadow: '0 0 10px rgba(0, 0, 0, 0)',
+                          maxWidth: '900px',
+                          marginBottom: '20px',
+                        }}
+                      >
+                        {item.title}
+                      </p>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+              <Row className="justify-content-center">
+                <Col xs="auto">
+                  <Image
+                    src={user.profile?.image || '/placeholder.jpg'}
+                    alt={user.profile?.name || 'Unknown Artist'}
+                    className="rounded-circle"
+                    width={250}
+                    height={250}
+                    style={{ objectFit: 'cover' }}
+                  />
+                  <div
+                    style={{
+                      color: 'white',
+                      backgroundColor: 'rgba(34, 34, 34, 0.7)',
+                      borderRadius: '15px',
+                      padding: '10px',
+                      boxShadow: '0 0 10px rgba(0, 0, 0, 0)',
+                      maxWidth: '900px',
+                      marginTop: '20px',
+                    }}
+                  >
+                    <h4 className="mt-3">{user.profile?.name || 'Unknown Artist'}</h4>
+                  </div>
+                </Col>
+              </Row>
+              <Row className="justify-content-center mt-3 mb-5">
+                <Col xs="auto">
+                  <Button variant="info" href={`/profile/${user.id}`}>
+                    See more from this artist
+                  </Button>
+                </Col>
+              </Row>
+              {/* 3. Profile Picture & Name - Now it's properly below */}
+            </Container>
+          </div>
+        </Carousel.Item>
+      ))}
     </Carousel>
   );
 }

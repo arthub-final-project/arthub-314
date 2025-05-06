@@ -35,9 +35,19 @@ const Home = () => {
 
   return (
     <main>
-      <Container id="landing-page" fluid className="py-3">
-        <Row>
-          <h1 className="text-center">ArtHub Weekly Featured Artist Showcase</h1>
+      <Container id="landing-page" fluid className="py-5">
+        <Row className="justify-content-center">
+          <div style={{
+            backgroundColor: 'rgba(34, 34, 34, 0.7)',
+            borderRadius: '30px',
+            padding: '10px',
+            boxShadow: '0 0 10px rgba(0, 0, 0, 0)',
+            maxWidth: '900px',
+            marginBottom: '20px',
+          }}
+          >
+            <h1 style={{ color: 'white' }} className="text-center">ArtHub Weekly Featured Artist Showcase</h1>
+          </div>
           <CarouselComponent users={users} />
         </Row>
       </Container>
