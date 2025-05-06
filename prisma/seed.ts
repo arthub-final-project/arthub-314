@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { hash } from 'bcrypt';
+/* import { hash } from 'bcrypt'; */
 
 const prisma = new PrismaClient();
 
@@ -11,7 +11,7 @@ async function main() {
   await prisma.profile.deleteMany({});
   await prisma.user.deleteMany({});
 
-  const password = await hash('changeme', 10);
+  /* const password = await hash('changeme', 10); */
 
   console.log('🌱 Seeding users...');
 

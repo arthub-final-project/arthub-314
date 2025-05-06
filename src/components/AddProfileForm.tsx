@@ -77,7 +77,7 @@ const AddProfileForm: React.FC = () => {
           </Col>
           <Card>
             <Card.Body>
-              <Form onSubmit={handleSubmit((data) => onSubmit(session)(data))}>
+              <Form onSubmit={handleSubmit(onSubmit)}>
                 <Row>
                   <Col>
                     <Form.Group className="mb-2">
