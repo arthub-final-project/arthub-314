@@ -81,8 +81,9 @@ const EditProfileForm = ({ profile }: { profile: Profile }) => {
         ...data,
         image: imageUrl,
         artpiece: artpieceUrl,
-        id: 0,
+        id: profile.id,
         owner: '', // Assuming owner is not editable here
+        userId: profile.userId,
       });
 
       swal('Success', 'Your profile has been updated', 'success', {

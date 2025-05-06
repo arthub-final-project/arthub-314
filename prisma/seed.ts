@@ -28,6 +28,7 @@ async function main() {
           socialMedia: '@aliceart',
           artpiece: 'Dream Forest',
           description: 'Alice creates surreal dreamscapes.',
+          owner: 'Alice',
         },
       },
       galleryItems: {
@@ -53,6 +54,7 @@ async function main() {
           socialMedia: '@bobthepainter',
           artpiece: 'Ocean Echoes',
           description: 'Bob explores natural textures and ocean vibes.',
+          owner: 'Bob',
         },
       },
       galleryItems: {
@@ -78,6 +80,7 @@ async function main() {
           socialMedia: '@carlaabstract',
           artpiece: 'Color Storm',
           description: 'Carla blends chaos and color into abstract beauty.',
+          owner: 'Carla',
         },
       },
       galleryItems: {

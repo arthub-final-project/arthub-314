@@ -20,13 +20,14 @@ export default async function getThreeRandomUsersWithProfileAndGallery(): Promis
   }
 
   const userResults = await Promise.all(
-    Array.from(randomOffsets).map(offset => prisma.user.findUnique({
+    Array.from(randomOffsets).map(offset => prisma.user.findMany({
       skip: offset,
+      take: 1,
       include: {
         profile: true,
         galleryItems: true,
       },
-    })),
+    }).then(users => users[0] || null)),
   );
   return userResults.filter((user): user is UserWithStuff => user !== null);
 }

@@ -14,6 +14,7 @@ export async function addProfile(
     artpiece: string;
     description: string;
     owner: string;
+    userId: number;
   },
 ) {
   await prisma.profile.create({
@@ -25,6 +26,7 @@ export async function addProfile(
       artpiece: profile.artpiece,
       description: profile.description,
       owner: profile.owner,
+      user: { connect: { id: profile.userId } },
     },
   });
   redirect('/list');
