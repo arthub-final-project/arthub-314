@@ -25,3 +25,5 @@ export const uploadImageAndGetURL = async (
 
   return data.publicUrl;
 };
+
+export { supabase };
