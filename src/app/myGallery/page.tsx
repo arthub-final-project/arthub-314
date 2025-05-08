@@ -3,7 +3,6 @@
 import { Container, Row } from 'react-bootstrap';
 import ArtworkCard from '@/components/ArtworkCard';
 import { useEffect, useState } from 'react';
-import { removeArtwork } from '@/lib/artworkActions';
 
 type Artwork = {
   id: string;
@@ -33,18 +32,30 @@ const MyGallery = () => {
     fetchGallery();
   }, []);
 
-  const handleRemoveArtwork = async (id: string, userId: number) => {
-    console.log('Attempting to remove artwork with ID:', id);
+  const handleRemoveArtwork = async (id: string) => {
     try {
-      const response = await removeArtwork(id, userId);
-
-      if (response.success) {
-        setArtworks((prevArtworks) => prevArtworks.filter((artwork) => artwork.id !== id));
-      } else {
-        console.error('Failed to remove artwork:', response.error);
+      // Make sure the user is authenticated before calling the API
+      const userJson = sessionStorage.getItem('user');
+      if (!userJson) {
+        console.error('No user found in sessionStorage');
+        return;
       }
-    } catch (error) {
-      console.error('Error during artwork removal:', error);
+      const user = JSON.parse(userJson);
+
+      const res = await fetch('/api/gallery/remove', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, userId: user.id }), // Include userId in the body if needed
+      });
+
+      const result = await res.json();
+      if (result.success) {
+        setArtworks((prev) => prev.filter((art) => art.id !== id));
+      } else {
+        console.error('Failed to remove artwork:', result.error);
+      }
+    } catch (err) {
+      console.error('Error removing artwork:', err);
     }
   };
 
@@ -82,7 +93,7 @@ const MyGallery = () => {
                   title={artwork.title}
                   imageUrl={artwork.imageUrl}
                   artistEmail={artwork.user?.email || ''}
-                  onDelete={() => handleRemoveArtwork(artwork.id, artwork.user.id)}
+                  onDelete={() => handleRemoveArtwork(artwork.id)}
                   showDeleteButton
                 />
               </div>
