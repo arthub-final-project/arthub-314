@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
@@ -30,5 +31,3 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ error: 'Failed to delete artwork' }, { status: 500 });
   }
 }
-
-export default DELETE;
