@@ -16,11 +16,11 @@ const ListPage = async () => {
       user: { email: string; id: string; randomKey: string };
     } | null,
   );
-  const userId = Number(session?.user!.id);
+  /* const userId = Number(session?.user!.id); */
   const profiles: Profile[] = await prisma.profile.findMany({
-    where: {
+    /* where: {
       userId,
-    },
+    }, */
   });
 
   console.log(profiles);
