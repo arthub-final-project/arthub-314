@@ -34,11 +34,11 @@ model User {
 model Profile {
   id              Int       @id @default(autoincrement())
   name            String
-  contact         String?
-  image           String?
-  socialMedia     String?
-  artpiece        String?
-  description     String?
+  contact         String
+  image           String
+  socialMedia     String
+  artpiece        String
+  description     String
   owner           String
   userId      Int    @unique
   user        User   @relation(fields: [userId], references: [id])
