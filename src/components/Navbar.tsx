@@ -10,8 +10,7 @@ import { BoxArrowRight, Lock, PersonFill, PersonPlusFill, Search } from 'react-b
 const NavBar: React.FC = () => {
   const { data: session } = useSession();
   const currentUser = session?.user?.email;
-  const userWithRole = session?.user as { email: string; randomKey: string };
-  const role = userWithRole?.randomKey;
+  const role = session?.user?.role;
   const pathName = usePathname();
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the default form submission behavior
