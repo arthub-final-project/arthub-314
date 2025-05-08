@@ -1,8 +1,8 @@
 /* eslint-disable react/button-has-type */
-import { getServerSession } from 'next-auth';
+/* import { getServerSession } from 'next-auth'; */
 import { Col, Container, Row } from 'react-bootstrap';
-import { loggedInProtectedPage } from '@/lib/page-protection';
-import authOptions from '@/lib/authOptions';
+/* import { loggedInProtectedPage } from '@/lib/page-protection'; */
+/* import authOptions from '@/lib/authOptions'; */
 import { Profile } from '@prisma/client';
 import ProfileCard from '@/components/ProfileCard';
 import { prisma } from '@/lib/prisma';
@@ -10,12 +10,12 @@ import { prisma } from '@/lib/prisma';
 /** Render a list of stuff for the logged in user. */
 const ListPage = async () => {
   // Protect the page, only logged in users can access it.
-  const session = await getServerSession(authOptions);
+  /* const session = await getServerSession(authOptions);
   loggedInProtectedPage(
     session as {
       user: { email: string; id: string; randomKey: string };
     } | null,
-  );
+  ); */
   /* const userId = Number(session?.user!.id); */
   const profiles: Profile[] = await prisma.profile.findMany({
     /* where: {
