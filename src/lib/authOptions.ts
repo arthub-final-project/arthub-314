@@ -38,7 +38,7 @@ const authOptions: NextAuthOptions = {
         }
 
         return {
-          id: `${user.id}`,
+          id: user.id, // Ensure id is returned as a number
           email: user.email,
           role: user.role,
         };

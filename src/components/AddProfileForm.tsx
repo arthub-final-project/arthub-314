@@ -1,7 +1,7 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { useRouter, redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -21,37 +21,9 @@ type FormInputs = {
   owner: string;
 };
 
-const onSubmit = (session: any) => async (data: FormInputs) => {
-  const imageFile = data.image[0];
-  const artpieceFile = data.artpiece[0];
-  const router = useRouter();
-
-  let imageUrl = '';
-  let artpieceUrl = '';
-
-  try {
-    if (imageFile) imageUrl = await uploadImageAndGetURL(imageFile, 'profile');
-    if (artpieceFile) artpieceUrl = await uploadImageAndGetURL(artpieceFile, 'artpieces');
-  } catch (err: any) {
-    swal('Upload Failed', err.message, 'error');
-    return;
-  }
-
-  const userId = session?.user?.id; // Assuming `id` is available in session.user
-  if (!userId) {
-    swal('Error', 'User ID is missing', 'error');
-    return;
-  }
-  await addProfile({ ...data, image: imageUrl, artpiece: artpieceUrl, userId });
-  swal('Success', 'Your profile has been added', 'success', {
-    timer: 2000,
-  }).then(() => {
-    router.push('/list');
-  });
-};
-
 const AddProfileForm: React.FC = () => {
   const { data: session, status } = useSession();
+  const router = useRouter();
   const currentUser = session?.user?.email || '';
 
   const {
@@ -63,13 +35,43 @@ const AddProfileForm: React.FC = () => {
     resolver: yupResolver(AddProfileSchema) as Resolver<FormInputs>,
   });
 
-  if (status === 'loading') {
-    return <LoadingSpinner />;
+  if (status === 'loading') return <LoadingSpinner />;
+  if (status === 'unauthenticated') {
+    router.push('/auth/signin');
+    return null;
   }
 
-  if (status === 'unauthenticated') {
-    redirect('/auth/signin');
-  }
+  const onSubmit = async (data: FormInputs) => {
+    const imageFile = data.image[0];
+    const artpieceFile = data.artpiece[0];
+
+    let imageUrl = '';
+    let artpieceUrl = '';
+
+    try {
+      if (imageFile) imageUrl = await uploadImageAndGetURL(imageFile, 'profile');
+      if (artpieceFile) artpieceUrl = await uploadImageAndGetURL(artpieceFile, 'artpieces');
+    } catch (err: any) {
+      swal('Upload Failed', err.message, 'error');
+      return;
+    }
+
+    const userId = Number(session?.user?.id);
+    if (!userId) {
+      swal('Error', 'User ID is missing', 'error');
+      return;
+    }
+
+    try {
+      await addProfile({ ...data, image: imageUrl, artpiece: artpieceUrl, userId });
+      swal('Success', 'Your profile has been added', 'success', { timer: 2000 }).then(() => {
+        router.push('/list');
+      });
+    } catch (err) {
+      console.error('❌ Error adding profile:', err);
+      swal('Error', 'Failed to add profile.', 'error');
+    }
+  };
 
   return (
     <Container className="py-3">
