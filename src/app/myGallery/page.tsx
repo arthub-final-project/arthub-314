@@ -10,6 +10,7 @@ type Artwork = {
   title: string;
   imageUrl: string;
   user: {
+    id: number;
     email: string;
   };
 };
@@ -32,30 +33,18 @@ const MyGallery = () => {
     fetchGallery();
   }, []);
 
-  const handleRemoveArtwork = async (id: string) => {
-    // Ensure sessionStorage is available and the user is correctly fetched
+  const handleRemoveArtwork = async (id: string, userId: number) => {
     console.log('Attempting to remove artwork with ID:', id);
-    if (typeof window !== 'undefined') {
-      const userJson = sessionStorage.getItem('user');
-      if (!userJson) {
-        console.error('No user found in sessionStorage');
-        return;
-      }
-      const user = JSON.parse(userJson);
+    try {
+      const response = await removeArtwork(id, userId);
 
-      try {
-        // Call the removeArtwork function and pass the necessary parameters
-        const response = await removeArtwork(id, user.id);
-
-        if (response.success) {
-          // Update the state to remove the deleted artwork
-          setArtworks((prevArtworks) => prevArtworks.filter((artwork) => artwork.id !== id));
-        } else {
-          console.error('Failed to remove artwork:', response.error);
-        }
-      } catch (error) {
-        console.error('Error during artwork removal:', error);
+      if (response.success) {
+        setArtworks((prevArtworks) => prevArtworks.filter((artwork) => artwork.id !== id));
+      } else {
+        console.error('Failed to remove artwork:', response.error);
       }
+    } catch (error) {
+      console.error('Error during artwork removal:', error);
     }
   };
 
@@ -93,7 +82,7 @@ const MyGallery = () => {
                   title={artwork.title}
                   imageUrl={artwork.imageUrl}
                   artistEmail={artwork.user?.email || ''}
-                  onDelete={() => handleRemoveArtwork(artwork.id)}
+                  onDelete={() => handleRemoveArtwork(artwork.id, artwork.user.id)}
                   showDeleteButton
                 />
               </div>
