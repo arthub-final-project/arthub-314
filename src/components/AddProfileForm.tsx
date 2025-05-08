@@ -9,6 +9,7 @@ import { redirect } from 'next/navigation';
 import { addProfile } from '@/lib/dbActions';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { AddProfileSchema } from '@/lib/validationSchemas';
+import { uploadImageAndGetURL } from '@/lib/supabase';
 
 type FormInputs = {
   name: string;
@@ -20,20 +21,20 @@ type FormInputs = {
   owner: string;
 };
 
-// Helper to convert File -> Base64 string
-const fileToBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => resolve(reader.result as string);
-  reader.onerror = (error) => reject(error);
-});
-
 const onSubmit = (session: any) => async (data: FormInputs) => {
   const imageFile = data.image[0];
   const artpieceFile = data.artpiece[0];
 
-  const imageUrl = imageFile ? await fileToBase64(imageFile) : '';
-  const artpieceUrl = artpieceFile ? await fileToBase64(artpieceFile) : '';
+  let imageUrl = '';
+  let artpieceUrl = '';
+
+  try {
+    if (imageFile) imageUrl = await uploadImageAndGetURL(imageFile, 'profile');
+    if (artpieceFile) artpieceUrl = await uploadImageAndGetURL(artpieceFile, 'artpieces');
+  } catch (err: any) {
+    swal('Upload Failed', err.message, 'error');
+    return;
+  }
 
   const userId = session?.user?.id; // Assuming `id` is available in session.user
   if (!userId) {
