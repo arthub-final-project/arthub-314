@@ -49,8 +49,8 @@ const AddProfileForm: React.FC = () => {
     let artpieceUrl = '';
 
     try {
-      if (imageFile) imageUrl = await uploadImageAndGetURL(imageFile, 'profile');
-      if (artpieceFile) artpieceUrl = await uploadImageAndGetURL(artpieceFile, 'artpieces');
+      if (imageFile) imageUrl = await uploadImageAndGetURL(imageFile, 'profile-images');
+      if (artpieceFile) artpieceUrl = await uploadImageAndGetURL(artpieceFile, 'gallery-images');
     } catch (err: any) {
       swal('Upload Failed', err.message, 'error');
       return;

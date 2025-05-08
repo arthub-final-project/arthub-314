@@ -14,13 +14,13 @@ export const uploadImageAndGetURL = async (
   const filePath = `${folder}/${timestamp}_${file.name}`;
 
   const { error } = await supabase.storage
-    .from('profile-images') // ✅ your bucket name here
+    .from('gallery') // ✅ your bucket name here
     .upload(filePath, file);
 
   if (error) throw new Error(`Upload failed: ${error.message}`);
 
   const { data } = supabase.storage
-    .from('profile-images')
+    .from('gallery')
     .getPublicUrl(filePath);
 
   return data.publicUrl;
