@@ -29,7 +29,6 @@ export async function addProfile(
       user: { connect: { id: profile.userId } },
     },
   });
-  redirect('/list');
 }
 
 export async function editProfile(profile: Profile) {

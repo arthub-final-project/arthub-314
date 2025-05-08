@@ -1,11 +1,11 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import { useRouter, redirect } from 'next/navigation';
 import { Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm, Resolver } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import swal from 'sweetalert';
-import { redirect } from 'next/navigation';
 import { addProfile } from '@/lib/dbActions';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { AddProfileSchema } from '@/lib/validationSchemas';
@@ -24,6 +24,7 @@ type FormInputs = {
 const onSubmit = (session: any) => async (data: FormInputs) => {
   const imageFile = data.image[0];
   const artpieceFile = data.artpiece[0];
+  const router = useRouter();
 
   let imageUrl = '';
   let artpieceUrl = '';
@@ -42,14 +43,10 @@ const onSubmit = (session: any) => async (data: FormInputs) => {
     return;
   }
   await addProfile({ ...data, image: imageUrl, artpiece: artpieceUrl, userId });
-  console.log('Creating profile with:', {
-    ...data,
-    image: imageUrl,
-    artpiece: artpieceUrl,
-    userId,
-  });
   swal('Success', 'Your profile has been added', 'success', {
     timer: 2000,
+  }).then(() => {
+    router.push('/list');
   });
 };
 
