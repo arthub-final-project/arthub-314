@@ -42,6 +42,7 @@ export async function editProfile(profile: Profile) {
       artpiece: profile.artpiece,
       description: profile.description,
       owner: profile.owner,
+      user: { connect: { id: profile.userId } },
     },
   });
   redirect('/list');

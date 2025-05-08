@@ -16,10 +16,10 @@ const ListPage = async () => {
       user: { email: string; id: string; randomKey: string };
     } | null,
   );
-  const owner = session?.user!.email ? session.user.email : '';
+  const userId = Number(session?.user!.id);
   const profiles: Profile[] = await prisma.profile.findMany({
     where: {
-      owner,
+      userId,
     },
   });
 
