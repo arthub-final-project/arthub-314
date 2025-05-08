@@ -42,7 +42,12 @@ const onSubmit = (session: any) => async (data: FormInputs) => {
     return;
   }
   await addProfile({ ...data, image: imageUrl, artpiece: artpieceUrl, userId });
-
+  console.log('Creating profile with:', {
+    ...data,
+    image: imageUrl,
+    artpiece: artpieceUrl,
+    userId,
+  });
   swal('Success', 'Your profile has been added', 'success', {
     timer: 2000,
   });
