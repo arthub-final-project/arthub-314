@@ -36,6 +36,13 @@ const NavBar: React.FC = () => {
             </Button>
           </Form>
           <Nav className="me-auto justify-content-start">
+            {!currentUser
+              ? [
+                  <Nav.Link id="list-stuff-nav" href="/list" key="list" active={pathName === '/list'}>
+                    Artist Profiles
+                  </Nav.Link>,
+                ]
+              : ''}
             {currentUser
               ? [
                   <Nav.Link id="list-stuff-nav" href="/list" key="list" active={pathName === '/list'}>
