@@ -119,6 +119,7 @@ export async function DELETE(req: NextRequest) {
 
     // Extract the filename from the URL
     const fileName = galleryItem.imageUrl.split('/').pop()!;
+    console.log('File to delete from Supabase:', fileName);
 
     // Delete from Supabase storage
     const { error: storageError } = await supabase.storage
