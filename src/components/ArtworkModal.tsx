@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { Modal } from 'react-bootstrap';
-import Image from 'next/image';
 
 type ArtworkModalProps = {
   artwork: {
@@ -19,11 +19,9 @@ const ArtworkModal: React.FC<ArtworkModalProps> = ({ artwork, onClose }) => (
     <Modal.Body className="text-center">
       {artwork && (
         <>
-          <Image
+          <img
             src={artwork.imageUrl}
             alt={artwork.title}
-            width={800}
-            height={600}
             style={{ maxWidth: '100%', height: 'auto', objectFit: 'contain' }}
           />
           {artwork.artistEmail && (
