@@ -59,7 +59,7 @@ const Home = () => {
           <Col>
             <Container className="border rounded p-4 my-4">
               <b className="d-block mb-2">March 28-29th</b>
-              <img src="/eventexample3.jpg" alt="3" className="gallery-img" />
+              <img src="/eventExample3.jpg" alt="3" className="gallery-img" />
             </Container>
           </Col>
           <Col>
