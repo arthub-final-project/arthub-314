@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { supabase } from '@/lib/supabase';
 import { getServerSession } from 'next-auth';
 import authOptions from '@/lib/authOptions';
 
@@ -23,6 +24,17 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: 'Not authorized or item not found' }, { status: 403 });
     }
 
+    const fileName = item.imageUrl.split('/').pop(); // Get filename from URL
+    const { error: storageError } = await supabase.storage
+      .from('gallery') // your bucket name
+      .remove([fileName!]);
+
+    if (storageError) {
+      console.error('Failed to delete image from Supabase:', storageError.message);
+      return NextResponse.json({ error: 'Failed to delete image from storage' }, { status: 500 });
+    }
+
+    // Remove item from DB
     await prisma.galleryItem.delete({ where: { id } });
 
     return NextResponse.json({ success: true });
