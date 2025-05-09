@@ -18,9 +18,17 @@ const ListPage = async () => {
   ); */
   /* const userId = Number(session?.user!.id); */
   const profiles: Profile[] = await prisma.profile.findMany({
-    /* where: {
-      userId,
-    }, */
+    select: {
+      id: true,
+      name: true,
+      contact: true,
+      image: true,
+      socialMedia: true,
+      artpiece: true,
+      description: true,
+      owner: true,
+      userId: true, // Critical for linking to userGallery
+    },
   });
 
   console.log(profiles);
