@@ -1,39 +1,37 @@
-/* eslint-disable react/jsx-indent, @typescript-eslint/indent */
-
 'use client';
 
 import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { BoxArrowRight, Lock, PersonFill, PersonPlusFill, Search, ArrowCounterclockwise } from 'react-bootstrap-icons';
-import { useEffect, useState } from 'react';
 
 const NavBar: React.FC = () => {
   const { data: session } = useSession();
-  const currentUser = session?.user?.email;
+  const currentUserEmail = session?.user?.email;
   const role = session?.user?.role;
   const pathName = usePathname();
-  const [userId, setUserId] = useState<number | null>(null);
+  const [profileId, setProfileId] = useState<number | null>(null);
+
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-    window.location.href = '/artworks'; // Redirect to the search page
+    e.preventDefault();
+    window.location.href = '/artworks';
   };
 
   useEffect(() => {
-  const fetchUserId = async () => {
-    if (!currentUser) return;
+    const fetchProfile = async () => {
+      if (!currentUserEmail) return;
+      try {
+        const res = await fetch(`/api/profile/byEmail?email=${currentUserEmail}`);
+        const data = await res.json();
+        if (data?.id) setProfileId(data.id);
+      } catch (err) {
+        console.error('Failed to fetch profile ID:', err);
+      }
+    };
 
-    try {
-      const res = await fetch(`/api/get-userId?email=${encodeURIComponent(currentUser)}`);
-      const data = await res.json();
-      setUserId(data.userId);
-    } catch (error) {
-      console.error('Failed to fetch userId', error);
-    }
-  };
-
-  fetchUserId();
-}, [currentUser]);
+    fetchProfile();
+  }, [currentUserEmail]);
 
   return (
     <Navbar bg="dark" expand="lg">
@@ -53,75 +51,51 @@ const NavBar: React.FC = () => {
               <Search color="white" />
             </Button>
           </Form>
+
           <Nav className="me-auto justify-content-start">
-            {!currentUser
-              ? [
-                  <Nav.Link id="list-stuff-nav" href="/list" key="list" active={pathName === '/list'}>
-                    Explore Artist Profiles
-                  </Nav.Link>,
-                ]
-              : ''}
-            {currentUser
-              ? [
-                  <Nav.Link id="list-stuff-nav" href="/list" key="list" active={pathName === '/list'}>
-                    Explore Artist Profiles
-                  </Nav.Link>,
-                  <Nav.Link id="list-stuff-nav" href="/upload" key="upload" active={pathName === '/upload'}>
-                    Upload
-                  </Nav.Link>,
-                  <Nav.Link id="gallery-nav" href="/myGallery" key="gallery" active={pathName === '/artworks'}>
-                    My Gallery
-                  </Nav.Link>,
-                  <Nav.Link href="/friends">
-                    Friends
-                  </Nav.Link>,
-                ]
-              : ''}
-            {currentUser && role === 'ADMIN' ? (
+            {!currentUserEmail && (
+              <Nav.Link href="/list" active={pathName === '/list'}>
+                Explore Artist Profiles
+              </Nav.Link>
+            )}
+            {currentUserEmail && (
               <>
-                <Nav.Link id="list-stuff-nav" href="/list" key="list" active={pathName === '/list'}>
-                  Explore Artist Profiles
-                </Nav.Link>
-                <Nav.Link id="list-stuff-nav" href="/upload" key="upload" active={pathName === '/upload'}>
-                  Upload
-                </Nav.Link>
-                <Nav.Link id="gallery-nav" href="/myGallery" key="gallery" active={pathName === '/artworks'}>
-                  My Gallery
-                </Nav.Link>
-                <Nav.Link href="/friends">
-                  Friends
-                </Nav.Link>
-                <Nav.Link id="admin-stuff-nav" href="/admin" key="admin" active={pathName === '/admin'}>
-                  Admin
-                </Nav.Link>
+                <Nav.Link href="/list" active={pathName === '/list'}>Explore Artist Profiles</Nav.Link>
+                <Nav.Link href="/upload" active={pathName === '/upload'}>Upload</Nav.Link>
+                <Nav.Link href="/myGallery" active={pathName === '/artworks'}>My Gallery</Nav.Link>
+                <Nav.Link href="/friends">Friends</Nav.Link>
               </>
-            ) : (
-              ''
+            )}
+            {currentUserEmail && role === 'ADMIN' && (
+              <Nav.Link href="/admin" active={pathName === '/admin'}>Admin</Nav.Link>
             )}
           </Nav>
+
           <Nav className="ms-auto justify-content-end">
             {session ? (
-              <NavDropdown id="login-dropdown" title={currentUser}>
-                <NavDropdown.Item id="login-dropdown-sign-out" href="/api/auth/signout">
+              <NavDropdown id="login-dropdown" title={currentUserEmail}>
+                <NavDropdown.Item href="/api/auth/signout">
                   <BoxArrowRight />
                   Sign Out
                 </NavDropdown.Item>
-                <NavDropdown.Item id="login-dropdown-change-password" href="/auth/change-password">
+                <NavDropdown.Item href="/auth/change-password">
                   <Lock />
                   Change Password
                 </NavDropdown.Item>
-                <NavDropdown.Item id="login-dropdown-edit" href={`/edit/${userId}`}>
-                  <ArrowCounterclockwise />
-                  Edit
-                </NavDropdown.Item>
+                {profileId && (
+                  <NavDropdown.Item id="login-dropdown-edit" href={`/edit/${profileId}`}>
+                    <ArrowCounterclockwise />
+                    Edit
+                  </NavDropdown.Item>
+                )}
               </NavDropdown>
             ) : (
               <NavDropdown id="login-dropdown" title="Login">
-                <NavDropdown.Item id="login-dropdown-sign-in" href="/auth/signin">
+                <NavDropdown.Item href="/auth/signin">
                   <PersonFill />
                   Sign in
                 </NavDropdown.Item>
-                <NavDropdown.Item id="login-dropdown-sign-up" href="/auth/signup">
+                <NavDropdown.Item href="/auth/signup">
                   <PersonPlusFill />
                   Sign up
                 </NavDropdown.Item>
