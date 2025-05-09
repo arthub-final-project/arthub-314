@@ -24,10 +24,11 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: 'Not authorized or item not found' }, { status: 403 });
     }
 
-    const fileName = item.imageUrl.split('/storage/v1/object/public/gallery/')[1]?.replace(/^\/+/, ''); // remove leading slashes
+    const url = new URL(item.imageUrl);
+    const fullPath = url.pathname.replace('/storage/v1/object/public/gallery/', '').replace(/^\/+/, '');
     const { error: storageError } = await supabase.storage
       .from('gallery')
-      .remove([fileName!]);
+      .remove([fullPath!]);
 
     if (storageError) {
       console.error('Failed to delete image from Supabase:', storageError.message);
