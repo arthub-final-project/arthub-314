@@ -23,12 +23,14 @@ export async function POST(req: NextRequest) {
   const buffer = Buffer.from(await file.arrayBuffer());
   const fileExt = file.name.split('.').pop();
   const fileName = `${Date.now()}.${fileExt}`;
+  const cleanFileName = fileName.replace(/^\/+/, ''); // removes leading slashes
 
   const { error } = await supabase.storage
     .from('gallery')
     .upload(fileName, buffer, {
       contentType: file.type,
       upsert: false,
+      metadata: { owner: session.user.id },
     });
 
   if (error) {
@@ -37,7 +39,7 @@ export async function POST(req: NextRequest) {
   }
 
   const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
+    where: { email: session.user.email, id: Number(session.user.id) },
     select: { id: true },
   });
 
@@ -45,7 +47,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'User not found' }, { status: 404 });
   }
 
-  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/gallery/${fileName}`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/gallery/${cleanFileName}`;
 
   await prisma.galleryItem.create({
     data: {

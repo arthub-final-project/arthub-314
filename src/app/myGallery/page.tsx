@@ -3,13 +3,13 @@
 import { Container, Row } from 'react-bootstrap';
 import ArtworkCard from '@/components/ArtworkCard';
 import { useEffect, useState } from 'react';
-import { removeArtwork } from '@/lib/artworkActions';
 
 type Artwork = {
   id: string;
   title: string;
   imageUrl: string;
   user: {
+    id: number;
     email: string;
   };
 };
@@ -33,29 +33,21 @@ const MyGallery = () => {
   }, []);
 
   const handleRemoveArtwork = async (id: string) => {
-    // Ensure sessionStorage is available and the user is correctly fetched
-    console.log('Attempting to remove artwork with ID:', id);
-    if (typeof window !== 'undefined') {
-      const userJson = sessionStorage.getItem('user');
-      if (!userJson) {
-        console.error('No user found in sessionStorage');
-        return;
-      }
-      const user = JSON.parse(userJson);
+    try {
+      const res = await fetch('/api/gallery/remove', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
 
-      try {
-        // Call the removeArtwork function and pass the necessary parameters
-        const response = await removeArtwork(id, user.id);
-
-        if (response.success) {
-          // Update the state to remove the deleted artwork
-          setArtworks((prevArtworks) => prevArtworks.filter((artwork) => artwork.id !== id));
-        } else {
-          console.error('Failed to remove artwork:', response.error);
-        }
-      } catch (error) {
-        console.error('Error during artwork removal:', error);
+      const result = await res.json();
+      if (result.success) {
+        setArtworks((prev) => prev.filter((art) => art.id !== id));
+      } else {
+        console.error('Failed to remove artwork:', result.error);
       }
+    } catch (err) {
+      console.error('Error removing artwork:', err);
     }
   };
 
