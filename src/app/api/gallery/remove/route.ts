@@ -5,25 +5,25 @@ import { getServerSession } from 'next-auth';
 import authOptions from '@/lib/authOptions';
 
 export async function DELETE(req: NextRequest) {
-  const { id, userId } = await req.json();
-  // Proceed with user authorization check using userId (from session or request)
-  const session = await getServerSession(authOptions); // Or whatever method you're using to get the session
-
-  if (!session || session.user.id !== userId) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
   try {
-    // Proceed with gallery item deletion logic here
-    const galleryItem = await prisma.galleryItem.findUnique({ where: { id } });
-    if (!galleryItem || galleryItem.userId !== userId) {
-      return NextResponse.json({ error: 'Artwork not found or not authorized to delete' }, { status: 404 });
+    const { id } = await req.json();
+    const session = await getServerSession({ req, ...authOptions });
+
+    if (!session || !session.user?.email) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Perform the delete operation
-    await prisma.galleryItem.delete({ where: { id } });
+    const user = await prisma.user.findUnique({ where: { email: session.user.email } });
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
 
-    // Also delete image from Supabase or wherever it's stored
+    const item = await prisma.galleryItem.findUnique({ where: { id } });
+    if (!item || item.userId !== user.id) {
+      return NextResponse.json({ error: 'Not authorized or item not found' }, { status: 403 });
+    }
+
+    await prisma.galleryItem.delete({ where: { id } });
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -34,18 +34,10 @@ const MyGallery = () => {
 
   const handleRemoveArtwork = async (id: string) => {
     try {
-      // Make sure the user is authenticated before calling the API
-      const userJson = sessionStorage.getItem('user');
-      if (!userJson) {
-        console.error('No user found in sessionStorage');
-        return;
-      }
-      const user = JSON.parse(userJson);
-
       const res = await fetch('/api/gallery/remove', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, userId: user.id }), // Include userId in the body if needed
+        body: JSON.stringify({ id }),
       });
 
       const result = await res.json();
