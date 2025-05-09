@@ -30,6 +30,7 @@ export async function POST(req: NextRequest) {
     .upload(fileName, buffer, {
       contentType: file.type,
       upsert: false,
+      metadata: { owner: session.user.id },
     });
 
   if (error) {
