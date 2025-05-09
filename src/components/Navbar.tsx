@@ -5,17 +5,35 @@
 import { useSession } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import { Container, Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
-import { BoxArrowRight, Lock, PersonFill, PersonPlusFill, Search } from 'react-bootstrap-icons';
+import { BoxArrowRight, Lock, PersonFill, PersonPlusFill, Search, ArrowCounterclockwise } from 'react-bootstrap-icons';
+import { useEffect, useState } from 'react';
 
 const NavBar: React.FC = () => {
   const { data: session } = useSession();
   const currentUser = session?.user?.email;
   const role = session?.user?.role;
   const pathName = usePathname();
+  const [userId, setUserId] = useState<number | null>(null);
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent the default form submission behavior
     window.location.href = '/artworks'; // Redirect to the search page
   };
+
+  useEffect(() => {
+  const fetchUserId = async () => {
+    if (!currentUser) return;
+
+    try {
+      const res = await fetch(`/api/get-userId?email=${encodeURIComponent(currentUser)}`);
+      const data = await res.json();
+      setUserId(data.userId);
+    } catch (error) {
+      console.error('Failed to fetch userId', error);
+    }
+  };
+
+  fetchUserId();
+}, [currentUser]);
 
   return (
     <Navbar bg="dark" expand="lg">
@@ -91,6 +109,10 @@ const NavBar: React.FC = () => {
                 <NavDropdown.Item id="login-dropdown-change-password" href="/auth/change-password">
                   <Lock />
                   Change Password
+                </NavDropdown.Item>
+                <NavDropdown.Item id="login-dropdown-edit" href={`/edit/${userId}`}>
+                  <ArrowCounterclockwise />
+                  Edit
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
