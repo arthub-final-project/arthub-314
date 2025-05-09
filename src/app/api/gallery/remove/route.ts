@@ -24,9 +24,9 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ error: 'Not authorized or item not found' }, { status: 403 });
     }
 
-    const fileName = item.imageUrl.split('/').pop(); // Get filename from URL
+    const fileName = item.imageUrl.split('/storage/v1/object/public/gallery/')[1]?.replace(/^\/+/, ''); // remove leading slashes
     const { error: storageError } = await supabase.storage
-      .from('gallery') // your bucket name
+      .from('gallery')
       .remove([fileName!]);
 
     if (storageError) {
