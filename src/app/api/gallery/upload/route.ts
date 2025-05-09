@@ -92,17 +92,19 @@ export async function DELETE(req: NextRequest) {
   if (!id) {
     return NextResponse.json({ error: 'Missing or invalid ID' }, { status: 400 });
   }
+
+  const numericId = Number(id);
+  if (Number.isNaN(numericId)) {
+    return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+  }
+
   if (!session || !session.user?.email) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  if (Number.isNaN(id)) {
-    return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
-  }
-
   try {
     // First fetch the gallery item to get the filename
-    const galleryItem = await prisma.galleryItem.findUnique({ where: { id } });
+    const galleryItem = await prisma.galleryItem.findUnique({ where: { id: String(numericId) } });
 
     if (!galleryItem) {
       return NextResponse.json({ error: 'Artwork not found' }, { status: 404 });
@@ -127,10 +129,11 @@ export async function DELETE(req: NextRequest) {
 
     if (storageError) {
       console.error('Error removing image from Supabase:', storageError);
+      return NextResponse.json({ error: 'Error removing image from Supabase' }, { status: 500 });
     }
 
     // Delete from database
-    await prisma.galleryItem.delete({ where: { id } });
+    await prisma.galleryItem.delete({ where: { id: String(numericId) } });
 
     return NextResponse.json({ success: true });
   } catch (error) {
