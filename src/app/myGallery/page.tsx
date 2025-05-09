@@ -34,15 +34,15 @@ const MyGallery = () => {
 
   const handleRemoveArtwork = async (id: string) => {
     try {
-      const res = await fetch('/api/gallery/remove', {
+      console.log('Sent DELETE for ID:', id);
+      const res = await fetch(`/api/gallery/remove?id=${id}`, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
       });
 
       const result = await res.json();
       if (result.success) {
         setArtworks((prev) => prev.filter((art) => art.id !== id));
+        console.log('Artwork successfully deleted:', id);
       } else {
         console.error('Failed to remove artwork:', result.error);
       }
