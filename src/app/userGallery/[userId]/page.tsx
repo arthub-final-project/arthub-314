@@ -3,7 +3,6 @@
 import { Container, Row } from 'react-bootstrap';
 import ArtworkCard from '@/components/ArtworkCard';
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
 
 type Artwork = {
   id: string;
@@ -15,14 +14,13 @@ type Artwork = {
   };
 };
 
-const UserGallery = () => {
-  const { userId } = useParams();
+const UserGallery = ({ params }: { params: { userId: string } }) => {
   const [artworks, setArtworks] = useState<Artwork[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchGallery = async () => {
-      const res = await fetch(`/api/gallery/user/${userId}`);
+      const res = await fetch(`/api/gallery/user/${params.userId}`);
       if (res.ok) {
         const data = await res.json();
         setArtworks(data);
@@ -32,8 +30,8 @@ const UserGallery = () => {
       setLoading(false);
     };
 
-    if (userId) fetchGallery();
-  }, [userId]);
+    fetchGallery();
+  }, [params.userId]);
 
   if (loading) {
     return (

@@ -6,7 +6,9 @@ import { NextResponse } from 'next/server';
 export async function GET(req: Request, { params }: { params: { userId: string } }) {
   const { userId } = params;
   const numericUserId = parseInt(userId, 10);
-
+  if (Number.isNaN(numericUserId)) {
+    return NextResponse.json({ error: 'Invalid userId' }, { status: 400 });
+  }
   try {
     const items = await prisma.galleryItem.findMany({
       where: { userId: numericUserId },

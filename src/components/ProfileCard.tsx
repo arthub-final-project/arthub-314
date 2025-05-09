@@ -55,7 +55,7 @@ const ProfileCard = ({ profile }: { profile: Profile }) => (
 
     {/* Footer */}
     <div className="text-end mt-1">
-      <Link href={`/gallery/${profile.id}`} className="btn btn-outline-primary btn-sm">
+      <Link href={`/userGallery/${profile.userId}`} className="btn btn-outline-primary btn-sm">
         View
       </Link>
     </div>
