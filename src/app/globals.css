@@ -117,9 +117,6 @@ body {
   color: #ffffff;
   border-bottom: 2px solid #6b623b;
 }
-.art-modal-header .btn-close {
-  filter: brightness(5); /* makes the X lighter */
-}
 .art-modal-body {
   background-color: #121212; /* even darker body */
   color: #ffffff;

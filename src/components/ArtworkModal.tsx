@@ -13,7 +13,7 @@ type ArtworkModalProps = {
 
 const ArtworkModal: React.FC<ArtworkModalProps> = ({ artwork, onClose }) => (
   <Modal show={!!artwork} onHide={onClose} size="xl" centered>
-    <Modal.Header closeButton className="art-modal-header">
+    <Modal.Header closeButton closeVariant="white" className="art-modal-header">
       <Modal.Title>{artwork?.title}</Modal.Title>
     </Modal.Header>
     <Modal.Body className="art-modal-body text-center">
