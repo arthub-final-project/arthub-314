@@ -36,10 +36,8 @@ const MyGallery = () => {
     try {
       const res = await fetch(`/api/gallery/remove?id=${id}`, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id }),
       });
-      console.log('Received ID:', id);
+      console.log('Sent DELETE for ID:', id);
 
       const result = await res.json();
       if (result.success) {
