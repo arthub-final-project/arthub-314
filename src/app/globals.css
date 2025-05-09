@@ -14,15 +14,15 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 .fixed-card {
   width: 300px;
   height: 200px;
 }
+
 #artworks-page {
-  background-color: #dcd0ac;
-  /*background-size: cover;
+  background-image: url('/Wallpaper2.jpg');
   background-position: center;
-  background-repeat: no-repeat;*/
 }
 #landing-page {
   background-image: url('/sunnyLake.jpg');
@@ -36,6 +36,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
 }
+
 .navbar .navbar-brand {
   color: white !important;
   font-size: 30px;
@@ -88,7 +89,6 @@ body {
   margin-left: 60px;     /* shift image to the right */
   margin-top: 10px;      /* shift image to the bottom */
 }
-
 .carousel-username {
   margin-left: 150px;
   bottom: auto !important;  /* Cancel Bootstrap's default "bottom: 20px" */
@@ -102,6 +102,7 @@ body {
   width: 100%;
   z-index: 1000; /* Ensure it appears above other content */
 }
+
 .text-outline {
   color: white;
   text-shadow:
@@ -109,4 +110,18 @@ body {
      1px -1px 0 black,
     -1px  1px 0 black,
      1px  1px 0 black;
+}
+
+.art-modal-header {
+  background-color: #1a1a1a; /* very dark background */
+  color: #ffffff;
+  border-bottom: 2px solid #6b623b; /* matches card border */
+}
+.art-modal-body {
+  background-color: #121212; /* even darker body */
+  color: #ffffff;
+  border-top: 2px solid #6b623b;
+}
+.art-modal-body .text-muted {
+  color: #c0c0c0 !important;
 }
