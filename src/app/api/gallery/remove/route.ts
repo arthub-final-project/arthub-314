@@ -6,36 +6,53 @@ import { getServerSession } from 'next-auth';
 import authOptions from '@/lib/authOptions';
 
 export async function DELETE(req: NextRequest) {
+  const session = await getServerSession(authOptions);
+  const { searchParams } = req.nextUrl;
+  const id = searchParams.get('id');
+  if (!id) {
+    return NextResponse.json({ error: 'Missing or invalid ID' }, { status: 400 });
+  }
+  if (!session || !session.user?.email) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  if (Number.isNaN(id)) {
+    return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+  }
+
   try {
-    const { id } = await req.json();
-    const session = await getServerSession({ req, ...authOptions });
+    // First fetch the gallery item to get the filename
+    const galleryItem = await prisma.galleryItem.findUnique({ where: { id } });
 
-    if (!session || !session.user?.email) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!galleryItem) {
+      return NextResponse.json({ error: 'Artwork not found' }, { status: 404 });
     }
 
-    const user = await prisma.user.findUnique({ where: { email: session.user.email } });
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    // Check if the current user is the owner
+    const user = await prisma.user.findUnique({
+      where: { email: session.user.email },
+    });
+
+    if (!user || galleryItem.userId !== Number(user.id)) {
+      return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
-    const item = await prisma.galleryItem.findUnique({ where: { id } });
-    if (!item || item.userId !== user.id) {
-      return NextResponse.json({ error: 'Not authorized or item not found' }, { status: 403 });
-    }
+    // Extract the filename from the URL
+    console.log('Gallery Item:', galleryItem); // Log the whole item
+    console.log('Image URL:', galleryItem.imageUrl); // Log just the imageUrl
+    const fileName = galleryItem.imageUrl.split('/').pop()!;
+    console.log('File to delete from Supabase:', fileName);
 
-    const url = new URL(item.imageUrl);
-    const fullPath = url.pathname.replace('/storage/v1/object/public/gallery/', '').replace(/^\/+/, '');
+    // Delete from Supabase storage
     const { error: storageError } = await supabase.storage
       .from('gallery')
-      .remove([fullPath!]);
+      .remove([fileName]);
 
     if (storageError) {
-      console.error('Failed to delete image from Supabase:', storageError.message);
-      return NextResponse.json({ error: 'Failed to delete image from storage' }, { status: 500 });
+      console.error('Error removing image from Supabase:', storageError);
     }
 
-    // Remove item from DB
+    // Delete from database
     await prisma.galleryItem.delete({ where: { id } });
 
     return NextResponse.json({ success: true });
