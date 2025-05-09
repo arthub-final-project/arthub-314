@@ -85,7 +85,7 @@ const NavBar: React.FC = () => {
                 {profileId && (
                   <NavDropdown.Item id="login-dropdown-edit" href={`/edit/${profileId}`}>
                     <ArrowCounterclockwise />
-                    Edit
+                    Edit Profile
                   </NavDropdown.Item>
                 )}
               </NavDropdown>
