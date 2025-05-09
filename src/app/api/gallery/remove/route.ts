@@ -7,8 +7,10 @@ import authOptions from '@/lib/authOptions';
 
 export async function DELETE(req: NextRequest) {
   const session = await getServerSession(authOptions);
-  const { searchParams } = req.nextUrl;
+  const { searchParams } = new URL(req.url);
   const id = searchParams.get('id');
+  console.log('Received ID:', id);
+
   if (!id) {
     return NextResponse.json({ error: 'Missing or invalid ID' }, { status: 400 });
   }
