@@ -14,7 +14,16 @@ export async function GET() {
       },
       include: {
         profile: true,
-        galleryItems: true,
+        galleryItems: {
+          orderBy: {
+            createdAt: 'desc', // Sort by most recent
+          },
+          take: 3, // Limit to 3
+          select: {
+            imageUrl: true,
+            title: true,
+          },
+        },
       },
     });
 
