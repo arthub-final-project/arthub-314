@@ -118,6 +118,8 @@ export async function DELETE(req: NextRequest) {
     }
 
     // Extract the filename from the URL
+    console.log('Gallery Item:', galleryItem); // Log the whole item
+    console.log('Image URL:', galleryItem.imageUrl); // Log just the imageUrl
     const fileName = galleryItem.imageUrl.split('/').pop()!;
     console.log('File to delete from Supabase:', fileName);
 
